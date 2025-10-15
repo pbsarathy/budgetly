@@ -52,7 +52,7 @@ export function calculateStats(expenses: Expense[]): ExpenseStats {
     Shopping: 0,
     Bills: 0,
     Education: 0,
-    Savings: 0,
+    Investments: 0,
     Other: 0,
   };
 
@@ -245,7 +245,7 @@ export function getCategoryColor(category: ExpenseCategory): string {
     Shopping: 'bg-pink-100 text-pink-700',
     Bills: 'bg-red-100 text-red-700',
     Education: 'bg-indigo-100 text-indigo-700',
-    Savings: 'bg-green-100 text-green-700',
+    Investments: 'bg-green-100 text-green-700',
     Other: 'bg-slate-100 text-slate-700',
   };
   return colors[category];
@@ -259,7 +259,7 @@ export function getCategoryIcon(category: ExpenseCategory): string {
     Shopping: '🛍️',
     Bills: '📄',
     Education: '📚',
-    Savings: '💰',
+    Investments: '💰',
     Other: '📌',
   };
   return icons[category];
@@ -345,13 +345,13 @@ export function generateInsights(expenses: Expense[]): Insight[] {
     }
   }
 
-  // Insight 5: Savings category positive reinforcement
-  const savingsAmount = categoryTotals['Savings'] || 0;
-  if (savingsAmount > 0) {
-    const savingsPercentage = (savingsAmount / currentMonthTotal) * 100;
+  // Insight 5: Investments category positive reinforcement
+  const investmentsAmount = categoryTotals['Investments'] || 0;
+  if (investmentsAmount > 0) {
+    const investmentsPercentage = (investmentsAmount / currentMonthTotal) * 100;
     insights.push({
       type: 'positive',
-      message: `Excellent! You've saved **${formatCurrency(savingsAmount)}** (${savingsPercentage.toFixed(0)}% of spending) this month`,
+      message: `Excellent! You've invested **${formatCurrency(investmentsAmount)}** (${investmentsPercentage.toFixed(0)}% of spending) this month`,
       icon: '💰'
     });
   }

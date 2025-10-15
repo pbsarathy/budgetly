@@ -81,7 +81,7 @@ export default function Charts() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
       {/* Pie Chart - Category Breakdown */}
-      <div className="bg-white/90 backdrop-blur-sm rounded-lg shadow-sm border border-slate-200 p-6">
+      <div className="bg-white/90 backdrop-blur-sm shadow-sm border border-slate-200 p-6">
         <h3 className="text-lg font-bold text-slate-900 mb-4">Spending by Category</h3>
         {pieData.length > 0 ? (
           <ResponsiveContainer width="100%" height={300}>
@@ -109,7 +109,7 @@ export default function Charts() {
       </div>
 
       {/* Line Chart - Spending Trend */}
-      <div className="bg-white/90 backdrop-blur-sm rounded-lg shadow-sm border border-slate-200 p-6">
+      <div className="bg-white/90 backdrop-blur-sm shadow-sm border border-slate-200 p-6">
         <h3 className="text-lg font-bold text-slate-900 mb-4">Spending Trend (Last 30 Days)</h3>
         <ResponsiveContainer width="100%" height={300}>
           <LineChart data={lineData}>

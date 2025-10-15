@@ -46,7 +46,7 @@ export default function ExportButton() {
       <button
         onClick={() => setShowMenu(!showMenu)}
         disabled={isExporting || filteredExpenses.length === 0}
-        className="px-4 py-2.5 bg-white border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-medium flex items-center gap-2"
+        className="px-4 py-2.5 bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-medium flex items-center gap-2"
       >
         <svg
           className="w-4 h-4"
@@ -79,7 +79,7 @@ export default function ExportButton() {
             className="fixed inset-0 z-10"
             onClick={() => setShowMenu(false)}
           />
-          <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-slate-200 py-1 z-20">
+          <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg border border-slate-200 py-1 z-20">
             <button
               onClick={handleExportCSV}
               className="w-full px-4 py-2 text-left text-sm text-slate-700 hover:bg-slate-50 flex items-center gap-3"

@@ -30,7 +30,7 @@ export default function CurrencySelector({ onCurrencyChange }: CurrencySelectorP
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1.5 sm:py-2 bg-white border border-slate-300 rounded-lg hover:bg-slate-50 transition-colors text-xs sm:text-sm font-medium text-slate-700"
+        className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1.5 sm:py-2 bg-white border border-slate-300 hover:bg-slate-50 transition-colors text-xs sm:text-sm font-medium text-slate-700"
         aria-label="Select currency"
       >
         <span className="text-base sm:text-lg">{currentCurrency.symbol}</span>
@@ -47,7 +47,7 @@ export default function CurrencySelector({ onCurrencyChange }: CurrencySelectorP
           />
 
           {/* Dropdown */}
-          <div className="absolute right-0 mt-2 w-48 bg-white border border-slate-200 rounded-lg shadow-xl z-30 overflow-hidden">
+          <div className="absolute right-0 mt-2 w-48 bg-white border border-slate-200 shadow-xl z-30 overflow-hidden">
             <div className="p-2">
               <p className="text-xs font-semibold text-slate-500 uppercase px-3 py-2">
                 Select Currency
@@ -61,7 +61,7 @@ export default function CurrencySelector({ onCurrencyChange }: CurrencySelectorP
                     <button
                       key={currency}
                       onClick={() => handleCurrencyChange(currency)}
-                      className={`w-full flex items-center gap-3 px-3 py-2 rounded-md transition-colors ${
+                      className={`w-full flex items-center gap-3 px-3 py-2 transition-colors ${
                         isSelected
                           ? 'bg-blue-50 text-blue-700 font-semibold'
                           : 'text-slate-700 hover:bg-slate-50'

@@ -44,13 +44,13 @@ export default function Modal({ isOpen, onClose, title, children }: ModalProps) 
       />
 
       {/* Modal */}
-      <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[92vh] overflow-y-auto animate-in zoom-in-95 duration-200 border-2 border-slate-200">
+      <div className="relative bg-white shadow-2xl w-full max-w-3xl max-h-[92vh] overflow-y-auto animate-in zoom-in-95 duration-200 border-2 border-slate-200">
         {/* Header */}
-        <div className="sticky top-0 bg-white border-b border-slate-200 px-5 py-4 sm:px-10 sm:py-6 flex items-center justify-between rounded-t-2xl">
+        <div className="sticky top-0 bg-white border-b border-slate-200 px-5 py-4 sm:px-10 sm:py-6 flex items-center justify-between">
           <h2 className="text-lg sm:text-2xl font-bold text-slate-900">{title}</h2>
           <button
             onClick={onClose}
-            className="p-2.5 hover:bg-slate-100 rounded-lg transition-all duration-200"
+            className="p-2.5 hover:bg-slate-100 transition-all duration-200"
             aria-label="Close"
           >
             <svg className="w-6 h-6 text-slate-400 hover:text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">

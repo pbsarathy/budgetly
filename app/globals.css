@@ -16,28 +16,30 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 50%, #e0e7ff 100%);
+  /* Bold vibrant gradient background */
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  background-attachment: fixed;
   min-height: 100vh;
   font-size: 16px;
   line-height: 1.6;
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar with brand colors */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: rgba(255, 255, 255, 0.1);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 5px;
+  background: rgba(102, 126, 234, 0.6);
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: rgba(102, 126, 234, 0.9);
 }
 
 /* Input number arrows removal for Chrome, Safari, Edge, Opera */

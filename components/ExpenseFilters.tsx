@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { ExpenseCategory } from '@/types/expense';
 import { useExpenses } from '@/contexts/ExpenseContext';
 
@@ -12,12 +12,13 @@ const CATEGORIES: (ExpenseCategory | 'All')[] = [
   'Shopping',
   'Bills',
   'Education',
-  'Savings',
+  'Investments',
   'Other',
 ];
 
 export default function ExpenseFilters() {
   const { filters, setFilters, expenses } = useExpenses();
+  const [isExpanded, setIsExpanded] = useState(false);
 
   // Generate list of available months from expenses
   const availableMonths = useMemo(() => {
@@ -41,11 +42,24 @@ export default function ExpenseFilters() {
     (filters.monthView && filters.monthView !== 'all');
 
   return (
-    <div className="bg-white/90 backdrop-blur-sm rounded-lg shadow-sm border border-slate-200 p-6">
-      <div className="flex items-center justify-between mb-5">
-        <h2 className="text-xl font-bold text-slate-900">
-          Filters
-        </h2>
+    <div className="bg-white/90 backdrop-blur-sm shadow-sm border border-slate-200 p-4 sm:p-6">
+      <div className="flex items-center justify-between">
+        <button
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="flex items-center gap-2 text-slate-900 hover:text-slate-700 transition-colors"
+        >
+          <svg
+            className={`w-5 h-5 transition-transform ${isExpanded ? 'rotate-90' : ''}`}
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+          <h2 className="text-lg sm:text-xl font-bold">
+            Filters {hasActiveFilters && <span className="text-blue-600">({Object.values(filters).filter(v => v && v !== 'All' && v !== 'all').length})</span>}
+          </h2>
+        </button>
         {hasActiveFilters && (
           <button
             onClick={() => setFilters({ category: 'All', searchTerm: '', monthView: 'all' })}
@@ -56,97 +70,101 @@ export default function ExpenseFilters() {
         )}
       </div>
 
-      {/* Month View Selector */}
-      <div className="mb-4">
-        <label htmlFor="month-view" className="block text-sm font-bold text-slate-700 mb-1.5">
-          View By Month
-        </label>
-        <select
-          id="month-view"
-          value={filters.monthView || 'current'}
-          onChange={(e) => setFilters({ ...filters, monthView: e.target.value })}
-          className="w-full md:w-64 px-3 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent transition-all"
-        >
-          <option value="all">All Time</option>
-          <option value="current">Current Month</option>
-          {availableMonths.map((month) => {
-            const [year, monthNum] = month.split('-');
-            const date = new Date(parseInt(year), parseInt(monthNum) - 1);
-            const monthName = date.toLocaleDateString('en-IN', { month: 'long', year: 'numeric' });
-            return (
-              <option key={month} value={month}>
-                {monthName}
-              </option>
-            );
-          })}
-        </select>
-      </div>
+      {isExpanded && (
+        <div className="mt-5">
+          {/* Month View Selector */}
+          <div className="mb-4">
+            <label htmlFor="month-view" className="block text-sm font-bold text-slate-700 mb-1.5">
+              View By Month
+            </label>
+            <select
+              id="month-view"
+              value={filters.monthView || 'current'}
+              onChange={(e) => setFilters({ ...filters, monthView: e.target.value })}
+              className="w-full md:w-64 px-3 py-2.5 border border-slate-300 focus:ring-2 focus:ring-slate-900 focus:border-transparent transition-all"
+            >
+              <option value="all">All Time</option>
+              <option value="current">Current Month</option>
+              {availableMonths.map((month) => {
+                const [year, monthNum] = month.split('-');
+                const date = new Date(parseInt(year), parseInt(monthNum) - 1);
+                const monthName = date.toLocaleDateString('en-IN', { month: 'long', year: 'numeric' });
+                return (
+                  <option key={month} value={month}>
+                    {monthName}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        {/* Category Filter */}
-        <div>
-          <label htmlFor="category-filter" className="block text-sm font-bold text-slate-700 mb-1.5">
-            Category
-          </label>
-          <select
-            id="category-filter"
-            value={filters.category || 'All'}
-            onChange={(e) =>
-              setFilters({ ...filters, category: e.target.value as ExpenseCategory | 'All' })
-            }
-            className="w-full px-3 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent transition-all"
-          >
-            {CATEGORIES.map((category) => (
-              <option key={category} value={category}>
-                {category}
-              </option>
-            ))}
-          </select>
-        </div>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            {/* Category Filter */}
+            <div>
+              <label htmlFor="category-filter" className="block text-sm font-bold text-slate-700 mb-1.5">
+                Category
+              </label>
+              <select
+                id="category-filter"
+                value={filters.category || 'All'}
+                onChange={(e) =>
+                  setFilters({ ...filters, category: e.target.value as ExpenseCategory | 'All' })
+                }
+                className="w-full px-3 py-2.5 border border-slate-300 focus:ring-2 focus:ring-slate-900 focus:border-transparent transition-all"
+              >
+                {CATEGORIES.map((category) => (
+                  <option key={category} value={category}>
+                    {category}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-        {/* Start Date */}
-        <div>
-          <label htmlFor="start-date" className="block text-sm font-bold text-slate-700 mb-1.5">
-            Start Date
-          </label>
-          <input
-            type="date"
-            id="start-date"
-            value={filters.startDate || ''}
-            onChange={(e) => setFilters({ ...filters, startDate: e.target.value })}
-            className="w-full px-3 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent transition-all"
-          />
-        </div>
+            {/* Start Date */}
+            <div>
+              <label htmlFor="start-date" className="block text-sm font-bold text-slate-700 mb-1.5">
+                Start Date
+              </label>
+              <input
+                type="date"
+                id="start-date"
+                value={filters.startDate || ''}
+                onChange={(e) => setFilters({ ...filters, startDate: e.target.value })}
+                className="w-full px-3 py-2.5 border border-slate-300 focus:ring-2 focus:ring-slate-900 focus:border-transparent transition-all"
+              />
+            </div>
 
-        {/* End Date */}
-        <div>
-          <label htmlFor="end-date" className="block text-sm font-bold text-slate-700 mb-1.5">
-            End Date
-          </label>
-          <input
-            type="date"
-            id="end-date"
-            value={filters.endDate || ''}
-            onChange={(e) => setFilters({ ...filters, endDate: e.target.value })}
-            className="w-full px-3 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent transition-all"
-          />
-        </div>
+            {/* End Date */}
+            <div>
+              <label htmlFor="end-date" className="block text-sm font-bold text-slate-700 mb-1.5">
+                End Date
+              </label>
+              <input
+                type="date"
+                id="end-date"
+                value={filters.endDate || ''}
+                onChange={(e) => setFilters({ ...filters, endDate: e.target.value })}
+                className="w-full px-3 py-2.5 border border-slate-300 focus:ring-2 focus:ring-slate-900 focus:border-transparent transition-all"
+              />
+            </div>
 
-        {/* Search */}
-        <div>
-          <label htmlFor="search" className="block text-sm font-bold text-slate-700 mb-1.5">
-            Search
-          </label>
-          <input
-            type="text"
-            id="search"
-            placeholder="Search..."
-            value={filters.searchTerm || ''}
-            onChange={(e) => setFilters({ ...filters, searchTerm: e.target.value })}
-            className="w-full px-3 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent transition-all"
-          />
+            {/* Search */}
+            <div>
+              <label htmlFor="search" className="block text-sm font-bold text-slate-700 mb-1.5">
+                Search
+              </label>
+              <input
+                type="text"
+                id="search"
+                placeholder="Search..."
+                value={filters.searchTerm || ''}
+                onChange={(e) => setFilters({ ...filters, searchTerm: e.target.value })}
+                className="w-full px-3 py-2.5 border border-slate-300 focus:ring-2 focus:ring-slate-900 focus:border-transparent transition-all"
+              />
+            </div>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

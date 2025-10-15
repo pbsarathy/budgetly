@@ -5,7 +5,7 @@ export type ExpenseCategory =
   | 'Shopping'
   | 'Bills'
   | 'Education'
-  | 'Savings'
+  | 'Investments'
   | 'Other';
 
 export type BillSubcategory =
@@ -20,11 +20,20 @@ export type BillSubcategory =
   | 'Insurance'
   | 'Other Bills';
 
+export type InvestmentSubcategory =
+  | 'Savings'
+  | 'Mutual Fund'
+  | 'Stocks'
+  | 'Jar'
+  | 'Other';
+
 export interface Expense {
   id: string;
   amount: number;
   category: ExpenseCategory;
-  subcategory?: BillSubcategory; // Optional subcategory for Bills
+  subcategory?: BillSubcategory | InvestmentSubcategory; // Optional subcategory for Bills and Investments
+  customSubcategory?: string; // For "Other" subcategory
+  customCategory?: string; // For "Other" category
   description: string;
   date: string; // ISO date string
   createdAt: string; // ISO date string
@@ -64,6 +73,9 @@ export interface RecurringExpense {
   id: string;
   amount: number;
   category: ExpenseCategory;
+  subcategory?: BillSubcategory | InvestmentSubcategory; // Optional subcategory for Bills and Investments
+  customSubcategory?: string; // For "Other" subcategory
+  customCategory?: string; // For "Other" category
   description: string;
   frequency: RecurringFrequency;
   startDate: string; // ISO date string

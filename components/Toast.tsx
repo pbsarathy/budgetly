@@ -58,7 +58,7 @@ export function ToastComponent({ toast, onClose }: ToastComponentProps) {
 
   return (
     <div
-      className={`${getToastStyles()} px-4 py-3 rounded-lg shadow-2xl flex items-center gap-3 min-w-[300px] max-w-md animate-in slide-in-from-right duration-300`}
+      className={`${getToastStyles()} px-4 py-3 shadow-2xl flex items-center gap-3 min-w-[300px] max-w-md animate-in slide-in-from-right duration-300`}
     >
       <span className="text-xl font-bold flex-shrink-0">{getIcon()}</span>
       <p className="flex-1 text-sm font-medium">{toast.message}</p>
@@ -69,7 +69,7 @@ export function ToastComponent({ toast, onClose }: ToastComponentProps) {
             toast.action?.onClick();
             onClose(toast.id);
           }}
-          className="px-3 py-1 text-xs font-semibold bg-white/20 hover:bg-white/30 rounded transition-colors flex-shrink-0"
+          className="px-3 py-1 text-xs font-semibold bg-white/20 hover:bg-white/30 transition-colors flex-shrink-0"
         >
           {toast.action.label}
         </button>

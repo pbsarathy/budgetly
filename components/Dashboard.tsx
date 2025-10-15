@@ -41,33 +41,33 @@ export default function Dashboard({ onAddExpense }: DashboardProps) {
       title: 'Total Spending',
       value: formatCurrency(stats.totalSpending),
       icon: '💰',
-      color: 'text-blue-700',
-      bg: 'bg-gradient-to-br from-blue-50 to-blue-100',
-      border: 'border-blue-200',
+      color: 'text-white',
+      bg: 'bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500',
+      iconBg: 'bg-white/20',
     },
     {
       title: 'This Month',
       value: formatCurrency(stats.monthlySpending),
       icon: '📅',
-      color: 'text-emerald-700',
-      bg: 'bg-gradient-to-br from-emerald-50 to-emerald-100',
-      border: 'border-emerald-200',
+      color: 'text-white',
+      bg: 'bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-500',
+      iconBg: 'bg-white/20',
     },
     {
       title: 'Average Expense',
       value: formatCurrency(stats.averageExpense),
       icon: '📊',
-      color: 'text-violet-700',
-      bg: 'bg-gradient-to-br from-violet-50 to-violet-100',
-      border: 'border-violet-200',
+      color: 'text-white',
+      bg: 'bg-gradient-to-br from-violet-500 via-purple-500 to-fuchsia-500',
+      iconBg: 'bg-white/20',
     },
     {
       title: 'Total Expenses',
       value: stats.expenseCount.toString(),
       icon: '🧾',
-      color: 'text-amber-700',
-      bg: 'bg-gradient-to-br from-amber-50 to-amber-100',
-      border: 'border-amber-200',
+      color: 'text-white',
+      bg: 'bg-gradient-to-br from-orange-500 via-red-500 to-pink-500',
+      iconBg: 'bg-white/20',
     },
   ];
 
@@ -113,22 +113,22 @@ export default function Dashboard({ onAddExpense }: DashboardProps) {
     <div className="space-y-4 sm:space-y-6">
       {/* Budget Warnings */}
       {budgetWarnings.length > 0 && (
-        <div className="space-y-2">
+        <div className="space-y-3">
           {budgetWarnings.map((warning, index) => (
             <div
               key={index}
-              className={`p-4 rounded-lg border-2 ${
+              className={`p-5 border-2 shadow-xl transform hover:scale-102 transition-all ${
                 warning.severity === 'critical'
-                  ? 'bg-red-50 border-red-300 text-red-800'
-                  : 'bg-yellow-50 border-yellow-300 text-yellow-800'
+                  ? 'bg-gradient-to-r from-red-50 to-pink-50 border-red-400 text-red-900'
+                  : 'bg-gradient-to-r from-yellow-50 to-orange-50 border-yellow-400 text-yellow-900'
               }`}
             >
-              <div className="flex items-start gap-3">
-                <span className="text-2xl flex-shrink-0">
+              <div className="flex items-start gap-4">
+                <span className="text-3xl flex-shrink-0 filter drop-shadow">
                   {warning.severity === 'critical' ? '🚨' : '⚠️'}
                 </span>
                 <div>
-                  <p className="font-semibold text-sm">{warning.message}</p>
+                  <p className="font-bold text-base">{warning.message}</p>
                 </div>
               </div>
             </div>
@@ -137,19 +137,24 @@ export default function Dashboard({ onAddExpense }: DashboardProps) {
       )}
 
       {/* Summary Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         {statCards.map((card, index) => (
           <div
             key={index}
-            className={`${card.bg} rounded-lg shadow-sm border ${card.border} p-4 sm:p-5 hover:shadow-md transition-shadow`}
+            className={`${card.bg} shadow-2xl p-6 sm:p-7 hover:shadow-3xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 relative overflow-hidden group`}
           >
-            <div className="flex items-start justify-between mb-2 sm:mb-3">
-              <div className="bg-white/60 backdrop-blur-sm w-9 h-9 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center text-lg sm:text-xl shadow-sm">
-                {card.icon}
+            {/* Animated gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-br from-white/0 via-white/5 to-white/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+
+            <div className="relative z-10">
+              <div className="flex items-start justify-between mb-4">
+                <div className={`${card.iconBg} backdrop-blur-sm w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center text-2xl sm:text-3xl shadow-xl transform group-hover:scale-110 transition-transform`}>
+                  <span className="filter drop-shadow-lg">{card.icon}</span>
+                </div>
               </div>
+              <p className="text-xs sm:text-sm text-white/90 font-semibold mb-2 uppercase tracking-wider">{card.title}</p>
+              <p className={`text-3xl sm:text-4xl font-extrabold ${card.color} drop-shadow-lg`}>{card.value}</p>
             </div>
-            <p className="text-xs sm:text-sm text-slate-600 mb-1">{card.title}</p>
-            <p className={`text-xl sm:text-2xl font-bold ${card.color}`}>{card.value}</p>
           </div>
         ))}
       </div>
@@ -157,10 +162,10 @@ export default function Dashboard({ onAddExpense }: DashboardProps) {
       {/* Top Categories - Modern Cards */}
       {topCategories.length > 0 && (
         <div>
-          <h2 className="text-xl font-bold text-slate-900 mb-4">
+          <h2 className="text-2xl sm:text-3xl font-extrabold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-6">
             Spending by Category
           </h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3 sm:gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 sm:gap-5">
             {topCategories.map(({ category, amount }) => {
               const percentage =
                 stats.totalSpending > 0 ? (amount / stats.totalSpending) * 100 : 0;
@@ -168,38 +173,43 @@ export default function Dashboard({ onAddExpense }: DashboardProps) {
               return (
                 <div
                   key={category}
-                  className="bg-white rounded-xl shadow-sm border border-slate-200 p-4 hover:shadow-md transition-all hover:scale-105 cursor-pointer"
+                  className="bg-white/95 backdrop-blur-sm shadow-xl border-2 border-white/40 p-5 hover:shadow-2xl transition-all duration-300 transform hover:scale-110 hover:-translate-y-2 cursor-pointer group relative overflow-hidden"
                 >
-                  {/* Icon */}
-                  <div className="flex justify-center mb-3">
-                    <div className="w-14 h-14 bg-gradient-to-br from-slate-100 to-slate-200 rounded-2xl flex items-center justify-center text-3xl shadow-sm">
-                      {getCategoryIcon(category)}
+                  {/* Gradient overlay on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 via-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+
+                  <div className="relative z-10">
+                    {/* Icon */}
+                    <div className="flex justify-center mb-3">
+                      <div className="w-16 h-16 bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 flex items-center justify-center text-4xl shadow-lg transform group-hover:scale-110 group-hover:rotate-6 transition-transform">
+                        <span className="filter drop-shadow">{getCategoryIcon(category)}</span>
+                      </div>
                     </div>
-                  </div>
 
-                  {/* Category Name */}
-                  <h3 className="text-sm font-semibold text-slate-900 text-center mb-2 truncate">
-                    {category}
-                  </h3>
+                    {/* Category Name */}
+                    <h3 className="text-sm font-bold text-slate-900 text-center mb-2 truncate">
+                      {category}
+                    </h3>
 
-                  {/* Amount */}
-                  <p className="text-lg font-bold text-slate-900 text-center mb-2">
-                    {formatCurrency(amount)}
-                  </p>
+                    {/* Amount */}
+                    <p className="text-xl font-extrabold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent text-center mb-2">
+                      {formatCurrency(amount)}
+                    </p>
 
-                  {/* Percentage */}
-                  <div className="flex items-center justify-center gap-1 mb-2">
-                    <div className="text-xs font-medium text-slate-500">
-                      {percentage.toFixed(1)}%
+                    {/* Percentage */}
+                    <div className="flex items-center justify-center gap-1 mb-3">
+                      <div className="text-xs font-bold text-slate-600">
+                        {percentage.toFixed(1)}%
+                      </div>
                     </div>
-                  </div>
 
-                  {/* Mini Progress Bar */}
-                  <div className="w-full bg-slate-100 rounded-full h-1.5">
-                    <div
-                      className="bg-gradient-to-r from-blue-500 to-blue-600 h-1.5 rounded-full transition-all duration-500"
-                      style={{ width: `${percentage}%` }}
-                    />
+                    {/* Mini Progress Bar */}
+                    <div className="w-full bg-slate-200 h-2 overflow-hidden">
+                      <div
+                        className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 h-2 transition-all duration-500 shadow-lg"
+                        style={{ width: `${percentage}%` }}
+                      />
+                    </div>
                   </div>
                 </div>
               );
@@ -237,25 +247,33 @@ export default function Dashboard({ onAddExpense }: DashboardProps) {
         };
 
         return (
-          <div className="bg-gradient-to-br from-indigo-600 to-purple-700 rounded-lg shadow-sm p-4 sm:p-6 text-white">
-            <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
-              <span className="text-xl">💡</span>
-              Smart Insights
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
-              {insights.map((insight, index) => (
-                <div
-                  key={index}
-                  className={`backdrop-blur-sm rounded-lg p-4 border ${getInsightStyles(insight.type)}`}
-                >
-                  <div className="flex items-start gap-3">
-                    <span className="text-2xl flex-shrink-0">{insight.icon}</span>
-                    <p className="leading-relaxed">
-                      {renderMarkdown(insight.message)}
-                    </p>
+          <div className="bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 shadow-2xl p-6 sm:p-8 text-white relative overflow-hidden">
+            {/* Animated background pattern */}
+            <div className="absolute inset-0 opacity-10">
+              <div className="absolute top-0 left-0 w-96 h-96 bg-white/20 rounded-full filter blur-3xl"></div>
+              <div className="absolute bottom-0 right-0 w-96 h-96 bg-white/20 rounded-full filter blur-3xl"></div>
+            </div>
+
+            <div className="relative z-10">
+              <h2 className="text-2xl sm:text-3xl font-extrabold mb-6 flex items-center gap-3">
+                <span className="text-3xl sm:text-4xl filter drop-shadow-lg">💡</span>
+                <span>Smart Insights</span>
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm sm:text-base">
+                {insights.map((insight, index) => (
+                  <div
+                    key={index}
+                    className={`backdrop-blur-md p-5 border-2 ${getInsightStyles(insight.type)} hover:scale-105 transition-transform duration-300 shadow-xl`}
+                  >
+                    <div className="flex items-start gap-4">
+                      <span className="text-3xl flex-shrink-0 filter drop-shadow-lg">{insight.icon}</span>
+                      <p className="leading-relaxed font-medium">
+                        {renderMarkdown(insight.message)}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         );

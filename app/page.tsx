@@ -19,23 +19,23 @@ type TabType = 'dashboard' | 'expenses' | 'budgets' | 'recurring';
 
 const TAB_STYLES = {
   dashboard: {
-    active: 'bg-gradient-to-br from-blue-500 to-blue-600 text-white shadow-lg',
-    hover: 'hover:bg-blue-50',
+    active: 'bg-gradient-to-br from-indigo-600 to-purple-600 text-white shadow-2xl',
+    hover: 'hover:bg-gradient-to-br hover:from-indigo-50 hover:to-purple-50',
     icon: '📊',
   },
   expenses: {
-    active: 'bg-gradient-to-br from-emerald-500 to-emerald-600 text-white shadow-lg',
-    hover: 'hover:bg-emerald-50',
+    active: 'bg-gradient-to-br from-emerald-600 to-teal-600 text-white shadow-2xl',
+    hover: 'hover:bg-gradient-to-br hover:from-emerald-50 hover:to-teal-50',
     icon: '💳',
   },
   budgets: {
-    active: 'bg-gradient-to-br from-purple-500 to-purple-600 text-white shadow-lg',
-    hover: 'hover:bg-purple-50',
+    active: 'bg-gradient-to-br from-purple-600 to-pink-600 text-white shadow-2xl',
+    hover: 'hover:bg-gradient-to-br hover:from-purple-50 hover:to-pink-50',
     icon: '💰',
   },
   recurring: {
-    active: 'bg-gradient-to-br from-orange-500 to-orange-600 text-white shadow-lg',
-    hover: 'hover:bg-orange-50',
+    active: 'bg-gradient-to-br from-orange-600 to-red-600 text-white shadow-2xl',
+    hover: 'hover:bg-gradient-to-br hover:from-orange-50 hover:to-red-50',
     icon: '🔄',
   },
 };
@@ -51,7 +51,7 @@ export default function Home() {
         <header className="bg-white/80 backdrop-blur-sm border-b border-slate-200 sticky top-0 z-10 shadow-sm">
           <div className="w-full px-4 sm:px-6 lg:px-8 py-3 sm:py-5">
             <div className="flex items-center gap-2 sm:gap-4">
-              <div className="bg-gradient-to-br from-emerald-500 to-teal-600 w-10 h-10 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center text-xl sm:text-2xl shadow-lg">
+              <div className="bg-gradient-to-br from-emerald-500 to-teal-600 w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center text-xl sm:text-2xl shadow-lg">
                 📊
               </div>
               <div>
@@ -75,19 +75,23 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Header */}
-      <header className="bg-white/80 backdrop-blur-sm border-b border-slate-200 sticky top-0 z-10 shadow-sm">
-        <div className="w-full px-4 sm:px-6 lg:px-8 py-3 sm:py-5">
+      <header className="bg-white/95 backdrop-blur-md border-b-2 border-white/20 sticky top-0 z-10 shadow-xl">
+        <div className="w-full px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
           <div className="flex items-center justify-between gap-2 sm:gap-4">
             {/* Logo and Title */}
-            <div className="flex items-center gap-2 sm:gap-4 min-w-0">
-              <div className="bg-gradient-to-br from-emerald-500 to-teal-600 w-10 h-10 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center text-xl sm:text-2xl shadow-lg flex-shrink-0">
-                📊
+            <div className="flex items-center gap-3 sm:gap-5 min-w-0">
+              {/* Glassmorphic Logo */}
+              <div className="relative group">
+                <div className="absolute inset-0 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 opacity-75 group-hover:opacity-100 blur transition-opacity"></div>
+                <div className="relative bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center text-2xl sm:text-3xl shadow-2xl flex-shrink-0 transform group-hover:scale-105 transition-transform">
+                  <span className="filter drop-shadow-lg">💰</span>
+                </div>
               </div>
               <div className="min-w-0">
-                <h1 className="text-lg sm:text-2xl font-bold text-slate-900 truncate">
+                <h1 className="text-2xl sm:text-4xl font-extrabold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent truncate">
                   Monetly
                 </h1>
-                <p className="text-xs sm:text-sm text-slate-500 hidden sm:block">Smart expense tracking made simple</p>
+                <p className="text-xs sm:text-sm font-medium text-slate-600 hidden sm:block mt-0.5">Turning expenses into insights ✨</p>
               </div>
             </div>
 
@@ -96,11 +100,12 @@ export default function Home() {
               <CurrencySelector />
               <button
                 onClick={handleAddExpense}
-                className="px-2.5 py-2 sm:px-5 sm:py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all font-medium shadow-md hover:shadow-lg flex items-center gap-1 text-sm sm:text-base whitespace-nowrap"
+                className="relative px-3 py-2.5 sm:px-6 sm:py-3 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700 transition-all font-bold shadow-xl hover:shadow-2xl flex items-center gap-1.5 text-sm sm:text-base whitespace-nowrap transform hover:scale-105 overflow-hidden group"
               >
-                <span className="text-lg">+</span>
-                <span className="hidden sm:inline">Add Expense</span>
-                <span className="sm:hidden text-xs">Add</span>
+                <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform"></div>
+                <span className="relative text-xl sm:text-2xl">+</span>
+                <span className="relative hidden sm:inline">Add Expense</span>
+                <span className="relative sm:hidden text-xs font-extrabold">Add</span>
               </button>
               <ExportButton />
             </div>
@@ -117,17 +122,17 @@ export default function Home() {
                   key={tab}
                   onClick={() => setActiveTab(tab)}
                   className={`
-                    px-3 py-2 sm:px-6 sm:py-3 font-semibold transition-all rounded-t-lg border-2 border-b-0 whitespace-nowrap
-                    flex items-center gap-1 sm:gap-2 min-w-fit text-xs sm:text-base flex-shrink-0
+                    px-4 py-2.5 sm:px-7 sm:py-3.5 font-bold transition-all duration-300 border-2 border-b-0 whitespace-nowrap
+                    flex items-center gap-1.5 sm:gap-2.5 min-w-fit text-xs sm:text-base flex-shrink-0 transform
                     ${isActive
-                      ? `${styles.active} border-transparent transform translate-y-0.5`
-                      : `bg-white/90 text-slate-600 border-slate-300 ${styles.hover} shadow-sm`
+                      ? `${styles.active} border-transparent translate-y-0.5 scale-105`
+                      : `bg-white/90 backdrop-blur-sm text-slate-700 border-white/40 ${styles.hover} shadow-lg hover:shadow-xl hover:scale-102`
                     }
                   `}
                 >
-                  <span className="text-sm sm:text-lg">{styles.icon}</span>
-                  <span className="hidden xs:inline">{tab.charAt(0).toUpperCase() + tab.slice(1)}</span>
-                  <span className="xs:hidden">{tab.charAt(0).toUpperCase() + tab.slice(1).substring(0, 3)}</span>
+                  <span className="text-base sm:text-xl filter drop-shadow">{styles.icon}</span>
+                  <span className="hidden xs:inline tracking-wide">{tab.charAt(0).toUpperCase() + tab.slice(1)}</span>
+                  <span className="xs:hidden tracking-wide">{tab.charAt(0).toUpperCase() + tab.slice(1).substring(0, 3)}</span>
                 </button>
               );
             })}
@@ -161,10 +166,13 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-white/60 backdrop-blur-sm border-t border-slate-200 mt-8 sm:mt-12">
-        <div className="w-full px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
-          <p className="text-center text-slate-500 text-xs sm:text-sm">
-            Turning expenses into insights
+      <footer className="bg-white/90 backdrop-blur-md border-t-2 border-white/30 mt-12 sm:mt-16 shadow-2xl">
+        <div className="w-full px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+          <p className="text-center text-lg sm:text-xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+            Turning expenses into insights ✨
+          </p>
+          <p className="text-center text-xs sm:text-sm text-slate-500 mt-2">
+            Made with 💜 by Claude Code
           </p>
         </div>
       </footer>

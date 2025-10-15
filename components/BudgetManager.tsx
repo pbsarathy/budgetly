@@ -13,7 +13,7 @@ const CATEGORIES: ExpenseCategory[] = [
   'Shopping',
   'Bills',
   'Education',
-  'Savings',
+  'Investments',
   'Other',
 ];
 
@@ -116,7 +116,7 @@ export default function BudgetManager() {
   const isNearOverallLimit = overallBudget && overallPercentage >= 80 && !isOverOverallBudget;
 
   return (
-    <div className="bg-white/90 backdrop-blur-sm rounded-lg shadow-sm border border-slate-200 p-6">
+    <div className="bg-white/90 backdrop-blur-sm shadow-sm border border-slate-200 p-6">
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-xl font-bold text-slate-900">Budget Manager</h2>
         <div className="flex gap-3">
@@ -137,7 +137,7 @@ export default function BudgetManager() {
 
       {/* Overall Budget Section */}
       {showOverallForm && (
-        <form onSubmit={handleOverallBudgetSubmit} className="mb-6 p-4 bg-indigo-50 rounded-lg border border-indigo-200">
+        <form onSubmit={handleOverallBudgetSubmit} className="mb-6 p-4 bg-indigo-50 border border-indigo-200">
           <h3 className="text-base font-bold text-slate-900 mb-3">Overall Monthly Budget</h3>
           <div className="flex gap-4">
             <div className="flex-1">
@@ -149,7 +149,7 @@ export default function BudgetManager() {
                 id="overall-budget-amount"
                 value={overallBudgetAmount}
                 onChange={(e) => setOverallBudgetAmount(e.target.value)}
-                className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent text-sm"
+                className="w-full px-3 py-2 border border-slate-300 focus:ring-2 focus:ring-indigo-600 focus:border-transparent text-sm"
                 placeholder="₹ 0"
                 step="100"
                 min="0"
@@ -159,7 +159,7 @@ export default function BudgetManager() {
           </div>
           <button
             type="submit"
-            className="mt-4 px-5 py-2.5 bg-gradient-to-r from-indigo-600 to-indigo-700 text-white hover:from-indigo-700 hover:to-indigo-800 transition-all duration-200 font-medium shadow-sm hover:shadow rounded-lg text-sm"
+            className="mt-4 px-5 py-2.5 bg-gradient-to-r from-indigo-600 to-indigo-700 text-white hover:from-indigo-700 hover:to-indigo-800 transition-all duration-200 font-medium shadow-sm hover:shadow text-sm"
           >
             Save Overall Budget
           </button>
@@ -168,7 +168,7 @@ export default function BudgetManager() {
 
       {/* Overall Budget Display */}
       {overallBudget && !showOverallForm && (
-        <div className="mb-6 p-5 bg-gradient-to-br from-indigo-50 to-purple-50 rounded-lg border-2 border-indigo-200">
+        <div className="mb-6 p-5 bg-gradient-to-br from-indigo-50 to-purple-50 border-2 border-indigo-200">
           <div className="flex items-center justify-between mb-3">
             <div>
               <h3 className="text-lg font-bold text-slate-900">Overall Monthly Budget</h3>
@@ -188,7 +188,7 @@ export default function BudgetManager() {
           </div>
 
           {/* Progress Bar */}
-          <div className="relative w-full h-4 bg-slate-200 rounded-full overflow-hidden">
+          <div className="relative w-full h-4 bg-slate-200 overflow-hidden">
             <div
               className={`h-full transition-all duration-300 ${
                 isOverOverallBudget
@@ -222,7 +222,7 @@ export default function BudgetManager() {
 
       {/* Category Budget Form */}
       {showForm && (
-        <form onSubmit={handleSubmit} className="mb-6 p-4 bg-slate-50 rounded-lg border border-slate-200">
+        <form onSubmit={handleSubmit} className="mb-6 p-4 bg-slate-50 border border-slate-200">
           <h3 className="text-base font-bold text-slate-900 mb-3">Category Budget</h3>
           <div className="grid grid-cols-2 gap-4">
             <div>
@@ -233,7 +233,7 @@ export default function BudgetManager() {
                 id="budget-category"
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value as ExpenseCategory)}
-                className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent text-sm"
+                className="w-full px-3 py-2 border border-slate-300 focus:ring-2 focus:ring-slate-900 focus:border-transparent text-sm"
                 required
               >
                 {CATEGORIES.map((cat) => (
@@ -252,7 +252,7 @@ export default function BudgetManager() {
                 id="budget-amount"
                 value={budgetAmount}
                 onChange={(e) => setBudgetAmount(e.target.value)}
-                className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent text-sm"
+                className="w-full px-3 py-2 border border-slate-300 focus:ring-2 focus:ring-slate-900 focus:border-transparent text-sm"
                 placeholder="₹ 0"
                 step="100"
                 min="0"
@@ -262,7 +262,7 @@ export default function BudgetManager() {
           </div>
           <button
             type="submit"
-            className="mt-4 px-5 py-2.5 bg-gradient-to-r from-slate-700 to-slate-800 text-white hover:from-slate-800 hover:to-slate-900 transition-all duration-200 font-medium shadow-sm hover:shadow rounded-lg text-sm"
+            className="mt-4 px-5 py-2.5 bg-gradient-to-r from-slate-700 to-slate-800 text-white hover:from-slate-800 hover:to-slate-900 transition-all duration-200 font-medium shadow-sm hover:shadow text-sm"
           >
             Save Category Budget
           </button>
@@ -289,7 +289,7 @@ export default function BudgetManager() {
             const isNearLimit = percentage >= 80 && !isOverBudget;
 
             return (
-              <div key={budget.category} className="p-5 bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl border-2 border-slate-200 hover:border-slate-300 transition-all duration-200 shadow-sm hover:shadow-md">
+              <div key={budget.category} className="p-5 bg-gradient-to-br from-slate-50 to-slate-100 border-2 border-slate-200 hover:border-slate-300 transition-all duration-200 shadow-sm hover:shadow-md">
                 <div className="flex items-center justify-between mb-3">
                   <div>
                     <h4 className="font-bold text-slate-900 text-base">{budget.category}</h4>
@@ -299,7 +299,7 @@ export default function BudgetManager() {
                   </div>
                   <button
                     onClick={() => deleteBudget(budget.category)}
-                    className="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all duration-200"
+                    className="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 transition-all duration-200"
                     title="Delete budget"
                   >
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -309,7 +309,7 @@ export default function BudgetManager() {
                 </div>
 
                 {/* Progress Bar */}
-                <div className="relative w-full h-4 bg-slate-200 rounded-full overflow-hidden mb-3 shadow-inner">
+                <div className="relative w-full h-4 bg-slate-200 overflow-hidden mb-3 shadow-inner">
                   <div
                     className={`h-full transition-all duration-500 ease-out ${
                       isOverBudget
@@ -324,17 +324,17 @@ export default function BudgetManager() {
 
                 {/* Warning Messages */}
                 {isOverBudget && (
-                  <p className="text-xs text-red-600 font-semibold bg-red-50 px-3 py-2 rounded-lg border border-red-200">
+                  <p className="text-xs text-red-600 font-semibold bg-red-50 px-3 py-2 border border-red-200">
                     ⚠️ Over budget by {formatCurrency(spent - budget.limit)}
                   </p>
                 )}
                 {isNearLimit && (
-                  <p className="text-xs text-yellow-700 font-semibold bg-yellow-50 px-3 py-2 rounded-lg border border-yellow-200">
+                  <p className="text-xs text-yellow-700 font-semibold bg-yellow-50 px-3 py-2 border border-yellow-200">
                     ⚠️ Approaching limit ({percentage.toFixed(0)}% used)
                   </p>
                 )}
                 {!isOverBudget && !isNearLimit && (
-                  <p className="text-xs text-green-700 font-medium bg-green-50 px-3 py-2 rounded-lg border border-green-200">
+                  <p className="text-xs text-green-700 font-medium bg-green-50 px-3 py-2 border border-green-200">
                     ✓ {formatCurrency(budget.limit - spent)} remaining
                   </p>
                 )}

@@ -33,7 +33,7 @@ export default function BudgetChart() {
   }
 
   return (
-    <div className="bg-white/90 backdrop-blur-sm rounded-lg shadow-sm border border-slate-200 p-6">
+    <div className="bg-white/90 backdrop-blur-sm shadow-sm border border-slate-200 p-6">
       <h3 className="text-lg font-bold text-slate-900 mb-4">Budget vs Spending</h3>
       <ResponsiveContainer width="100%" height={300}>
         <BarChart data={budgetData}>
