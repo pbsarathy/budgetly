@@ -259,20 +259,20 @@ export default function ExpenseForm({ editingExpense, onCancel, onClose }: Expen
       </div>
 
       {/* Buttons */}
-      <div className="flex gap-3 justify-end mt-8 pt-6 border-t border-slate-200">
+      <div className="flex gap-2 sm:gap-3 justify-end mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-slate-200">
         <button
           type="button"
           onClick={handleCancel}
-          className="px-8 py-3.5 text-slate-700 bg-white hover:bg-slate-50 border-2 border-slate-300 hover:border-slate-400 font-semibold transition-all duration-200 shadow-sm hover:shadow rounded-lg"
+          className="px-5 py-3 sm:px-8 sm:py-3.5 text-slate-700 bg-white hover:bg-slate-50 border-2 border-slate-300 hover:border-slate-400 font-semibold transition-all duration-200 shadow-sm hover:shadow rounded-lg text-sm sm:text-base"
         >
           Cancel
         </button>
         <button
           type="submit"
           disabled={isSubmitting}
-          className="px-10 py-3.5 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold shadow-md hover:shadow-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg"
+          className="px-6 py-3 sm:px-10 sm:py-3.5 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold shadow-md hover:shadow-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg text-sm sm:text-base"
         >
-          {isSubmitting ? 'Saving...' : editingExpense ? 'Update Expense' : 'Add Expense'}
+          {isSubmitting ? 'Saving...' : editingExpense ? 'Update' : 'Add Expense'}
         </button>
       </div>
     </form>

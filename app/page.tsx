@@ -92,22 +92,22 @@ export default function Home() {
             </div>
 
             {/* Action Buttons */}
-            <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+            <div className="flex items-center gap-1.5 sm:gap-3 flex-shrink-0">
               <CurrencySelector />
               <button
                 onClick={handleAddExpense}
-                className="px-3 py-2 sm:px-5 sm:py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all font-medium shadow-md hover:shadow-lg flex items-center gap-1 sm:gap-2 text-sm sm:text-base"
+                className="px-2.5 py-2 sm:px-5 sm:py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all font-medium shadow-md hover:shadow-lg flex items-center gap-1 text-sm sm:text-base whitespace-nowrap"
               >
                 <span className="text-lg">+</span>
                 <span className="hidden sm:inline">Add Expense</span>
-                <span className="sm:hidden">Add</span>
+                <span className="sm:hidden text-xs">Add</span>
               </button>
               <ExportButton />
             </div>
           </div>
 
           {/* Navigation Tabs - File Tab Style */}
-          <div className="flex gap-2 sm:gap-3 mt-4 sm:mt-6 overflow-x-auto pb-1 scrollbar-hide -mx-4 px-4 sm:mx-0 sm:px-0">
+          <div className="flex gap-1.5 sm:gap-3 mt-4 sm:mt-6 overflow-x-auto pb-1 scrollbar-hide -mx-4 px-4 sm:mx-0 sm:px-0">
             {(Object.keys(TAB_STYLES) as TabType[]).map((tab) => {
               const isActive = activeTab === tab;
               const styles = TAB_STYLES[tab];
@@ -117,16 +117,17 @@ export default function Home() {
                   key={tab}
                   onClick={() => setActiveTab(tab)}
                   className={`
-                    px-4 py-2 sm:px-6 sm:py-3 font-semibold transition-all rounded-t-lg border-2 border-b-0 whitespace-nowrap
-                    flex items-center gap-1.5 sm:gap-2 min-w-fit text-sm sm:text-base
+                    px-3 py-2 sm:px-6 sm:py-3 font-semibold transition-all rounded-t-lg border-2 border-b-0 whitespace-nowrap
+                    flex items-center gap-1 sm:gap-2 min-w-fit text-xs sm:text-base flex-shrink-0
                     ${isActive
                       ? `${styles.active} border-transparent transform translate-y-0.5`
                       : `bg-white/90 text-slate-600 border-slate-300 ${styles.hover} shadow-sm`
                     }
                   `}
                 >
-                  <span className="text-base sm:text-lg">{styles.icon}</span>
-                  {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                  <span className="text-sm sm:text-lg">{styles.icon}</span>
+                  <span className="hidden xs:inline">{tab.charAt(0).toUpperCase() + tab.slice(1)}</span>
+                  <span className="xs:hidden">{tab.charAt(0).toUpperCase() + tab.slice(1).substring(0, 3)}</span>
                 </button>
               );
             })}
