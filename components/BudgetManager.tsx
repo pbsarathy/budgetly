@@ -123,27 +123,28 @@ export default function BudgetManager() {
       {/* Overall Budget Section */}
       {showOverallForm && (
         <form onSubmit={handleOverallBudgetSubmit} className="mb-6 p-4 bg-indigo-50 rounded-lg border border-indigo-200">
-          <h3 className="text-lg font-bold text-slate-900 mb-3">Overall Monthly Budget</h3>
+          <h3 className="text-base font-bold text-slate-900 mb-3">Overall Monthly Budget</h3>
           <div className="flex gap-4">
             <div className="flex-1">
-              <label htmlFor="overall-budget-amount" className="block text-sm font-bold text-slate-700 mb-1.5">
-                Total Monthly Budget
+              <label htmlFor="overall-budget-amount" className="block text-sm font-medium text-slate-700 mb-1.5">
+                Total Monthly Budget <span className="text-red-500">*</span>
               </label>
               <input
                 type="number"
                 id="overall-budget-amount"
                 value={overallBudgetAmount}
                 onChange={(e) => setOverallBudgetAmount(e.target.value)}
-                className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+                className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent text-sm"
                 placeholder="₹ 0"
                 step="100"
                 min="0"
+                required
               />
             </div>
           </div>
           <button
             type="submit"
-            className="mt-4 w-full px-6 py-3 bg-gradient-to-r from-indigo-600 to-indigo-700 text-white hover:from-indigo-700 hover:to-indigo-800 transition-all duration-200 font-semibold shadow-md hover:shadow-lg"
+            className="mt-4 px-5 py-2.5 bg-gradient-to-r from-indigo-600 to-indigo-700 text-white hover:from-indigo-700 hover:to-indigo-800 transition-all duration-200 font-medium shadow-sm hover:shadow rounded-lg text-sm"
           >
             Save Overall Budget
           </button>
@@ -207,17 +208,18 @@ export default function BudgetManager() {
       {/* Category Budget Form */}
       {showForm && (
         <form onSubmit={handleSubmit} className="mb-6 p-4 bg-slate-50 rounded-lg border border-slate-200">
-          <h3 className="text-lg font-bold text-slate-900 mb-3">Category Budget</h3>
+          <h3 className="text-base font-bold text-slate-900 mb-3">Category Budget</h3>
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label htmlFor="budget-category" className="block text-sm font-medium text-slate-700 mb-1.5">
-                Category
+                Category <span className="text-red-500">*</span>
               </label>
               <select
                 id="budget-category"
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value as ExpenseCategory)}
-                className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent"
+                className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent text-sm"
+                required
               >
                 {CATEGORIES.map((cat) => (
                   <option key={cat} value={cat}>
@@ -228,27 +230,35 @@ export default function BudgetManager() {
             </div>
             <div>
               <label htmlFor="budget-amount" className="block text-sm font-medium text-slate-700 mb-1.5">
-                Monthly Budget
+                Monthly Budget <span className="text-red-500">*</span>
               </label>
               <input
                 type="number"
                 id="budget-amount"
                 value={budgetAmount}
                 onChange={(e) => setBudgetAmount(e.target.value)}
-                className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent"
+                className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent text-sm"
                 placeholder="₹ 0"
                 step="100"
                 min="0"
+                required
               />
             </div>
           </div>
           <button
             type="submit"
-            className="mt-4 w-full px-6 py-3 bg-gradient-to-r from-slate-700 to-slate-800 text-white hover:from-slate-800 hover:to-slate-900 transition-all duration-200 font-semibold shadow-md hover:shadow-lg"
+            className="mt-4 px-5 py-2.5 bg-gradient-to-r from-slate-700 to-slate-800 text-white hover:from-slate-800 hover:to-slate-900 transition-all duration-200 font-medium shadow-sm hover:shadow rounded-lg text-sm"
           >
             Save Category Budget
           </button>
         </form>
+      )}
+
+      {/* Help Text for Required Fields */}
+      {(showForm || showOverallForm) && (
+        <p className="text-xs text-slate-500 mb-4">
+          <span className="text-red-500">*</span> Required fields
+        </p>
       )}
 
       {budgets.length === 0 ? (

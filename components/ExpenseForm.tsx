@@ -161,7 +161,7 @@ export default function ExpenseForm({ editingExpense, onCancel, onClose }: Expen
         {/* Amount */}
         <div>
           <label htmlFor="amount" className="block text-sm font-medium text-slate-700 mb-1.5">
-            Amount
+            Amount <span className="text-red-500">*</span>
           </label>
           <input
             type="number"
@@ -174,6 +174,7 @@ export default function ExpenseForm({ editingExpense, onCancel, onClose }: Expen
               errors.amount ? 'border-red-500' : 'border-slate-300'
             }`}
             placeholder="₹ 0"
+            required
           />
           {errors.amount && <p className="mt-1 text-xs text-red-500">{errors.amount}</p>}
         </div>
@@ -242,7 +243,7 @@ export default function ExpenseForm({ editingExpense, onCancel, onClose }: Expen
         {/* Description */}
         <div>
           <label htmlFor="description" className="block text-sm font-medium text-slate-700 mb-1.5">
-            Description
+            Description <span className="text-red-500">*</span>
           </label>
           <input
             type="text"
@@ -253,10 +254,32 @@ export default function ExpenseForm({ editingExpense, onCancel, onClose }: Expen
               errors.description ? 'border-red-500' : 'border-slate-300'
             }`}
             placeholder="Enter description"
+            required
           />
           {errors.description && <p className="mt-1 text-xs text-red-500">{errors.description}</p>}
         </div>
       </div>
+
+      {/* Recurring Expense Checkbox */}
+      <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+        <label className="flex items-start gap-3 cursor-pointer">
+          <input
+            type="checkbox"
+            className="mt-0.5 w-4 h-4 text-blue-600 border-slate-300 rounded focus:ring-2 focus:ring-blue-500"
+          />
+          <div>
+            <span className="text-sm font-medium text-slate-900">Make this a recurring expense</span>
+            <p className="text-xs text-slate-600 mt-0.5">
+              This expense will be automatically added at regular intervals
+            </p>
+          </div>
+        </label>
+      </div>
+
+      {/* Required Fields Help Text */}
+      <p className="text-xs text-slate-500 mt-4">
+        <span className="text-red-500">*</span> Required fields
+      </p>
 
       {/* Buttons */}
       <div className="flex gap-2 sm:gap-3 justify-end mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-slate-200">

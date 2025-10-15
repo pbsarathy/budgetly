@@ -2,7 +2,10 @@
   "permissions": {
     "allow": [
       "Bash(npm run build)",
-      "Read(//home/partha/Pictures/Screenshots/**)"
+      "Read(//home/partha/Pictures/Screenshots/**)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nAdd required field markers, recurring checkbox, and normalize budget forms\n\nBudget Manager Improvements:\n- Normalized form sizes (text-sm, smaller padding)\n- Reduced button sizes to regular (px-5 py-2.5)\n- Changed headings from text-lg to text-base\n- Changed labels from font-bold to font-medium\n- Added grid layout (already in place, kept 2-column)\n- Added help text for required fields\n\nRequired Field Markers:\n- Added red asterisk (*) to all mandatory fields\n- Amount, Description in ExpenseForm\n- Total Monthly Budget in BudgetManager\n- Category and Monthly Budget in category form\n- Added \"Required fields\" help text in both forms\n- Added required attribute to HTML inputs\n\nRecurring Expense Feature:\n- Added checkbox in ExpenseForm with blue info box\n- Clear explanation text about auto-adding expenses\n- Positioned below main form fields, above buttons\n- Mobile-friendly layout with proper spacing\n\nMobile-First Approach:\n- All text sizes optimized for mobile (text-sm, text-xs)\n- Proper spacing and padding for touch targets\n- Forms work well on small screens\n\nFiles modified:\n- components/BudgetManager.tsx: Normalized sizes, added * markers\n- components/ExpenseForm.tsx: Added * markers, recurring checkbox, help text\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git push:*)"
     ],
     "deny": [],
     "ask": []
