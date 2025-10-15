@@ -17,7 +17,7 @@ export default function Dashboard() {
     return (
       <EmptyState
         icon="📊"
-        title="Welcome to Budgetly!"
+        title="Welcome to Spendora!"
         description="Start tracking your expenses and get insights into your spending habits. Add your first expense to see your dashboard come to life."
         action={{
           label: 'Add Your First Expense',

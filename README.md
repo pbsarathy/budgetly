@@ -1,6 +1,6 @@
-# Budgetly
+# Spendora
 
-A modern, professional expense tracking and budgeting web application built with Next.js 15, TypeScript, and Tailwind CSS. Track your personal finances with ease, visualize spending patterns, manage budgets, and export your data.
+A modern, professional expense tracking and budgeting web application built with Next.js 15, TypeScript, and Tailwind CSS. Smart expense tracking made simple - visualize spending patterns, manage budgets, and gain financial insights.
 
 ![Next.js](https://img.shields.io/badge/Next.js-15.5-black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)
@@ -67,7 +67,7 @@ A modern, professional expense tracking and budgeting web application built with
 
 1. Clone the repository or download the project:
 ```bash
-cd budgetly
+cd spendora
 ```
 
 2. Install dependencies:
@@ -148,7 +148,7 @@ npm start
 ## Project Structure
 
 ```
-budgetly/
+spendora/
 ├── app/
 │   ├── globals.css          # Global styles and Tailwind imports
 │   ├── layout.tsx            # Root layout with context provider

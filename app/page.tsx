@@ -56,8 +56,8 @@ export default function Home() {
                 💰
               </div>
               <div>
-                <h1 className="text-lg sm:text-2xl font-bold text-slate-900">Budgetly</h1>
-                <p className="text-xs sm:text-sm text-slate-500 hidden sm:block">Manage your finances efficiently</p>
+                <h1 className="text-lg sm:text-2xl font-bold text-slate-900">Spendora</h1>
+                <p className="text-xs sm:text-sm text-slate-500 hidden sm:block">Smart expense tracking made simple</p>
               </div>
             </div>
           </div>
