@@ -1,4 +1,4 @@
-# Spendora
+# Monetly
 
 A modern, professional expense tracking and budgeting web application built with Next.js 15, TypeScript, and Tailwind CSS. Smart expense tracking made simple - visualize spending patterns, manage budgets, and gain financial insights.
 
@@ -67,7 +67,7 @@ A modern, professional expense tracking and budgeting web application built with
 
 1. Clone the repository or download the project:
 ```bash
-cd spendora
+cd monetly
 ```
 
 2. Install dependencies:
@@ -148,7 +148,7 @@ npm start
 ## Project Structure
 
 ```
-spendora/
+monetly/
 ├── app/
 │   ├── globals.css          # Global styles and Tailwind imports
 │   ├── layout.tsx            # Root layout with context provider

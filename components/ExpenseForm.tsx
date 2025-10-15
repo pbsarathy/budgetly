@@ -156,25 +156,8 @@ export default function ExpenseForm({ editingExpense, onCancel, onClose }: Expen
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white/90 backdrop-blur-sm rounded-lg shadow-sm border border-slate-200 p-4 sm:p-6">
-      <div className="flex items-center justify-between mb-4 sm:mb-6">
-        <h2 className="text-lg sm:text-xl font-bold text-slate-900">
-          {editingExpense ? 'Edit Expense' : 'New Expense'}
-        </h2>
-        {onClose && (
-          <button
-            type="button"
-            onClick={handleCancel}
-            className="text-slate-400 hover:text-slate-600 transition-colors p-1"
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-        )}
-      </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-4 sm:mb-6">
+    <form onSubmit={handleSubmit}>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
         {/* Amount */}
         <div>
           <label htmlFor="amount" className="block text-sm font-medium text-slate-700 mb-1.5">
@@ -276,20 +259,18 @@ export default function ExpenseForm({ editingExpense, onCancel, onClose }: Expen
       </div>
 
       {/* Buttons */}
-      <div className="flex flex-col-reverse sm:flex-row gap-2 sm:gap-3 justify-end">
-        {(editingExpense || onClose) && (
-          <button
-            type="button"
-            onClick={handleCancel}
-            className="w-full sm:w-auto px-4 py-2.5 text-slate-700 hover:bg-slate-100 rounded-lg transition-colors font-medium border border-slate-300"
-          >
-            Cancel
-          </button>
-        )}
+      <div className="flex gap-3 justify-end mt-6">
+        <button
+          type="button"
+          onClick={handleCancel}
+          className="px-6 py-3 text-slate-700 bg-white hover:bg-slate-50 border-2 border-slate-300 hover:border-slate-400 font-semibold transition-all duration-200 shadow-sm hover:shadow"
+        >
+          Cancel
+        </button>
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full sm:w-auto px-5 py-2.5 bg-gradient-to-r from-slate-700 to-slate-800 text-white rounded-lg hover:from-slate-800 hover:to-slate-900 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed font-semibold shadow-md hover:shadow-lg"
+          className="px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold shadow-md hover:shadow-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isSubmitting ? 'Saving...' : editingExpense ? 'Update Expense' : 'Add Expense'}
         </button>

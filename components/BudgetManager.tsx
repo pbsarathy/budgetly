@@ -107,13 +107,13 @@ export default function BudgetManager() {
         <div className="flex gap-3">
           <button
             onClick={() => setShowOverallForm(!showOverallForm)}
-            className="px-6 py-3 bg-gradient-to-r from-indigo-600 to-indigo-700 text-white rounded-lg hover:from-indigo-700 hover:to-indigo-800 transition-all duration-200 text-sm font-semibold shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+            className="px-6 py-3 bg-gradient-to-r from-indigo-600 to-indigo-700 text-white hover:from-indigo-700 hover:to-indigo-800 transition-all duration-200 text-sm font-semibold shadow-md hover:shadow-lg"
           >
             {showOverallForm ? 'Cancel' : overallBudget ? 'Edit Overall Budget' : 'Set Overall Budget'}
           </button>
           <button
             onClick={() => setShowForm(!showForm)}
-            className="px-6 py-3 bg-gradient-to-r from-slate-700 to-slate-800 text-white rounded-lg hover:from-slate-800 hover:to-slate-900 transition-all duration-200 text-sm font-semibold shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+            className="px-6 py-3 bg-gradient-to-r from-slate-700 to-slate-800 text-white hover:from-slate-800 hover:to-slate-900 transition-all duration-200 text-sm font-semibold shadow-md hover:shadow-lg"
           >
             {showForm ? 'Cancel' : 'Set Category Budget'}
           </button>
@@ -143,7 +143,7 @@ export default function BudgetManager() {
           </div>
           <button
             type="submit"
-            className="mt-4 w-full px-6 py-3 bg-gradient-to-r from-indigo-600 to-indigo-700 text-white rounded-lg hover:from-indigo-700 hover:to-indigo-800 transition-all duration-200 font-semibold shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+            className="mt-4 w-full px-6 py-3 bg-gradient-to-r from-indigo-600 to-indigo-700 text-white hover:from-indigo-700 hover:to-indigo-800 transition-all duration-200 font-semibold shadow-md hover:shadow-lg"
           >
             Save Overall Budget
           </button>
@@ -244,7 +244,7 @@ export default function BudgetManager() {
           </div>
           <button
             type="submit"
-            className="mt-4 w-full px-6 py-3 bg-gradient-to-r from-slate-700 to-slate-800 text-white rounded-lg hover:from-slate-800 hover:to-slate-900 transition-all duration-200 font-semibold shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+            className="mt-4 w-full px-6 py-3 bg-gradient-to-r from-slate-700 to-slate-800 text-white hover:from-slate-800 hover:to-slate-900 transition-all duration-200 font-semibold shadow-md hover:shadow-lg"
           >
             Save Category Budget
           </button>

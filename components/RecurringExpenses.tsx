@@ -71,7 +71,7 @@ export default function RecurringExpensesManager() {
         <h2 className="text-xl font-bold text-slate-900">Recurring Expenses</h2>
         <button
           onClick={() => setShowForm(!showForm)}
-          className="px-4 py-2 bg-slate-800 text-white rounded-lg hover:bg-slate-900 transition-colors text-sm font-medium"
+          className="px-6 py-3 bg-gradient-to-r from-slate-700 to-slate-800 text-white hover:from-slate-800 hover:to-slate-900 transition-all duration-200 text-sm font-semibold shadow-md hover:shadow-lg"
         >
           {showForm ? 'Cancel' : 'Add Recurring'}
         </button>
@@ -149,7 +149,7 @@ export default function RecurringExpensesManager() {
 
           <button
             type="submit"
-            className="mt-4 w-full px-4 py-2 bg-slate-800 text-white rounded-lg hover:bg-slate-900 transition-colors font-medium"
+            className="mt-4 w-full px-6 py-3 bg-gradient-to-r from-slate-700 to-slate-800 text-white hover:from-slate-800 hover:to-slate-900 transition-all duration-200 font-semibold shadow-md hover:shadow-lg"
           >
             Add Recurring Expense
           </button>

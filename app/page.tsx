@@ -86,7 +86,7 @@ export default function Home() {
               </div>
               <div className="min-w-0">
                 <h1 className="text-lg sm:text-2xl font-bold text-slate-900 truncate">
-                  Spendora
+                  Monetly
                 </h1>
                 <p className="text-xs sm:text-sm text-slate-500 hidden sm:block">Smart expense tracking made simple</p>
               </div>

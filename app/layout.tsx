@@ -6,8 +6,8 @@ import { ExpenseProvider } from "@/contexts/ExpenseContext";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Spendora - Smart Expense Tracker",
-  description: "Smart expense tracking made simple. Track expenses, manage budgets, and gain financial insights with Spendora.",
+  title: "Monetly - Smart Expense Tracker",
+  description: "Smart expense tracking made simple. Track expenses, manage budgets, and gain financial insights with Monetly.",
 };
 
 export default function RootLayout({
