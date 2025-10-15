@@ -1,20 +1,26 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useExpenses } from '@/contexts/ExpenseContext';
 import { calculateStats, formatCurrency, getCategoryIcon, generateInsights } from '@/lib/utils';
 import { ExpenseCategory } from '@/types/expense';
 import Charts from './Charts';
 import BudgetChart from './BudgetChart';
 import EmptyState from './EmptyState';
+import { overallBudgetStorage } from '@/lib/expenseStorage';
 
 interface DashboardProps {
   onAddExpense: () => void;
 }
 
 export default function Dashboard({ onAddExpense }: DashboardProps) {
-  const { expenses } = useExpenses();
+  const { expenses, budgets } = useExpenses();
   const stats = calculateStats(expenses);
+  const [overallBudget, setOverallBudget] = useState<{limit: number; period: string} | null>(null);
+
+  useEffect(() => {
+    setOverallBudget(overallBudgetStorage.get());
+  }, []);
 
   if (expenses.length === 0) {
     return (
@@ -74,8 +80,62 @@ export default function Dashboard({ onAddExpense }: DashboardProps) {
     .sort((a, b) => b.amount - a.amount)
     .slice(0, 6);
 
+  // Check for budget warnings
+  const budgetWarnings: Array<{type: string; message: string; severity: string}> = [];
+
+  if (overallBudget && stats.monthlySpending > overallBudget.limit) {
+    budgetWarnings.push({
+      type: 'overall',
+      message: `You've exceeded your overall monthly budget by ${formatCurrency(stats.monthlySpending - overallBudget.limit)}`,
+      severity: 'critical'
+    });
+  } else if (overallBudget && (stats.monthlySpending / overallBudget.limit) >= 0.9) {
+    budgetWarnings.push({
+      type: 'overall',
+      message: `You're at ${((stats.monthlySpending / overallBudget.limit) * 100).toFixed(0)}% of your overall budget`,
+      severity: 'warning'
+    });
+  }
+
+  // Check category budget warnings
+  budgets.forEach(budget => {
+    const categorySpending = stats.categoryBreakdown[budget.category];
+    if (categorySpending > budget.limit) {
+      budgetWarnings.push({
+        type: 'category',
+        message: `${budget.category}: Over budget by ${formatCurrency(categorySpending - budget.limit)}`,
+        severity: 'warning'
+      });
+    }
+  });
+
   return (
     <div className="space-y-4 sm:space-y-6">
+      {/* Budget Warnings */}
+      {budgetWarnings.length > 0 && (
+        <div className="space-y-2">
+          {budgetWarnings.map((warning, index) => (
+            <div
+              key={index}
+              className={`p-4 rounded-lg border-2 ${
+                warning.severity === 'critical'
+                  ? 'bg-red-50 border-red-300 text-red-800'
+                  : 'bg-yellow-50 border-yellow-300 text-yellow-800'
+              }`}
+            >
+              <div className="flex items-start gap-3">
+                <span className="text-2xl flex-shrink-0">
+                  {warning.severity === 'critical' ? '🚨' : '⚠️'}
+                </span>
+                <div>
+                  <p className="font-semibold text-sm">{warning.message}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
       {/* Summary Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         {statCards.map((card, index) => (

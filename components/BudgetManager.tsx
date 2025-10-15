@@ -74,6 +74,21 @@ export default function BudgetManager() {
       return;
     }
 
+    // Validate against overall budget
+    if (overallBudget) {
+      const totalCategoryBudgets = budgets
+        .filter(b => b.category !== selectedCategory)
+        .reduce((sum, b) => sum + b.limit, 0) + parseFloat(budgetAmount);
+
+      if (totalCategoryBudgets > overallBudget) {
+        if (!window.confirm(
+          `Warning: Total category budgets (${formatCurrency(totalCategoryBudgets)}) exceed your overall budget (${formatCurrency(overallBudget)}). Do you want to continue?`
+        )) {
+          return;
+        }
+      }
+    }
+
     const budget: Budget = {
       category: selectedCategory,
       limit: parseFloat(budgetAmount),
