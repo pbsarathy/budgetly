@@ -52,8 +52,8 @@ export default function Home() {
         <header className="bg-white/80 backdrop-blur-sm border-b border-slate-200 sticky top-0 z-10 shadow-sm">
           <div className="w-full px-4 sm:px-6 lg:px-8 py-3 sm:py-5">
             <div className="flex items-center gap-2 sm:gap-4">
-              <div className="bg-gradient-to-br from-blue-600 to-purple-600 w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl flex items-center justify-center text-xl sm:text-2xl shadow-lg">
-                💰
+              <div className="bg-gradient-to-br from-emerald-500 to-teal-600 w-10 h-10 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center text-xl sm:text-2xl shadow-lg">
+                📊
               </div>
               <div>
                 <h1 className="text-lg sm:text-2xl font-bold text-slate-900">Spendora</h1>
@@ -81,14 +81,14 @@ export default function Home() {
           <div className="flex items-center justify-between gap-2 sm:gap-4">
             {/* Logo and Title */}
             <div className="flex items-center gap-2 sm:gap-4 min-w-0">
-              <div className="bg-gradient-to-br from-blue-600 to-purple-600 w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl flex items-center justify-center text-xl sm:text-2xl shadow-lg flex-shrink-0">
-                💰
+              <div className="bg-gradient-to-br from-emerald-500 to-teal-600 w-10 h-10 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center text-xl sm:text-2xl shadow-lg flex-shrink-0">
+                📊
               </div>
               <div className="min-w-0">
                 <h1 className="text-lg sm:text-2xl font-bold text-slate-900 truncate">
-                  Budgetly
+                  Spendora
                 </h1>
-                <p className="text-xs sm:text-sm text-slate-500 hidden sm:block">Manage your finances efficiently</p>
+                <p className="text-xs sm:text-sm text-slate-500 hidden sm:block">Smart expense tracking made simple</p>
               </div>
             </div>
 
