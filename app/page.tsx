@@ -9,7 +9,6 @@ import ExportButton from '@/components/ExportButton';
 import BudgetManager from '@/components/BudgetManager';
 import RecurringExpensesManager from '@/components/RecurringExpenses';
 import FloatingActionButton from '@/components/FloatingActionButton';
-import RecentExpensesQuickAdd from '@/components/RecentExpensesQuickAdd';
 import CurrencySelector from '@/components/CurrencySelector';
 import Modal from '@/components/Modal';
 import { ToastContainer } from '@/components/Toast';
@@ -48,7 +47,7 @@ export default function Home() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-slate-50">
+      <div className="min-h-screen">
         <header className="bg-white/80 backdrop-blur-sm border-b border-slate-200 sticky top-0 z-10 shadow-sm">
           <div className="w-full px-4 sm:px-6 lg:px-8 py-3 sm:py-5">
             <div className="flex items-center gap-2 sm:gap-4">
@@ -74,7 +73,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-slate-50">
+    <div className="min-h-screen">
       {/* Header */}
       <header className="bg-white/80 backdrop-blur-sm border-b border-slate-200 sticky top-0 z-10 shadow-sm">
         <div className="w-full px-4 sm:px-6 lg:px-8 py-3 sm:py-5">
@@ -122,7 +121,7 @@ export default function Home() {
                     flex items-center gap-1.5 sm:gap-2 min-w-fit text-sm sm:text-base
                     ${isActive
                       ? `${styles.active} border-transparent transform translate-y-0.5`
-                      : `bg-white text-slate-600 border-slate-200 ${styles.hover}`
+                      : `bg-white/90 text-slate-600 border-slate-300 ${styles.hover} shadow-sm`
                     }
                   `}
                 >
@@ -148,10 +147,9 @@ export default function Home() {
       <main className="w-full px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
         <div className="max-w-7xl mx-auto space-y-4 sm:space-y-6">
           {/* Content Views */}
-          {activeTab === 'dashboard' && <Dashboard />}
+          {activeTab === 'dashboard' && <Dashboard onAddExpense={handleAddExpense} />}
           {activeTab === 'expenses' && (
             <div className="space-y-4 sm:space-y-6">
-              <RecentExpensesQuickAdd />
               <ExpenseFilters />
               <ExpenseList />
             </div>

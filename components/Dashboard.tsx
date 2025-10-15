@@ -6,10 +6,13 @@ import { calculateStats, formatCurrency, getCategoryIcon, generateInsights } fro
 import { ExpenseCategory } from '@/types/expense';
 import Charts from './Charts';
 import BudgetChart from './BudgetChart';
-import RecentExpensesQuickAdd from './RecentExpensesQuickAdd';
 import EmptyState from './EmptyState';
 
-export default function Dashboard() {
+interface DashboardProps {
+  onAddExpense: () => void;
+}
+
+export default function Dashboard({ onAddExpense }: DashboardProps) {
   const { expenses } = useExpenses();
   const stats = calculateStats(expenses);
 
@@ -21,7 +24,7 @@ export default function Dashboard() {
         description="Start tracking your expenses and get insights into your spending habits. Add your first expense to see your dashboard come to life."
         action={{
           label: 'Add Your First Expense',
-          onClick: () => window.scrollTo({ top: 0, behavior: 'smooth' }),
+          onClick: onAddExpense,
         }}
       />
     );
@@ -73,9 +76,6 @@ export default function Dashboard() {
 
   return (
     <div className="space-y-4 sm:space-y-6">
-      {/* Recent Expenses Quick Add */}
-      <RecentExpensesQuickAdd />
-
       {/* Summary Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         {statCards.map((card, index) => (

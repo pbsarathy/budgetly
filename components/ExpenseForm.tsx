@@ -259,18 +259,18 @@ export default function ExpenseForm({ editingExpense, onCancel, onClose }: Expen
       </div>
 
       {/* Buttons */}
-      <div className="flex gap-3 justify-end mt-6">
+      <div className="flex gap-3 justify-end mt-8 pt-6 border-t border-slate-200">
         <button
           type="button"
           onClick={handleCancel}
-          className="px-6 py-3 text-slate-700 bg-white hover:bg-slate-50 border-2 border-slate-300 hover:border-slate-400 font-semibold transition-all duration-200 shadow-sm hover:shadow"
+          className="px-8 py-3.5 text-slate-700 bg-white hover:bg-slate-50 border-2 border-slate-300 hover:border-slate-400 font-semibold transition-all duration-200 shadow-sm hover:shadow rounded-lg"
         >
           Cancel
         </button>
         <button
           type="submit"
           disabled={isSubmitting}
-          className="px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold shadow-md hover:shadow-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="px-10 py-3.5 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold shadow-md hover:shadow-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg"
         >
           {isSubmitting ? 'Saving...' : editingExpense ? 'Update Expense' : 'Add Expense'}
         </button>
