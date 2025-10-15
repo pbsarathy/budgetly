@@ -92,9 +92,9 @@ export function DashboardSkeleton() {
 
 export function LoadingSpinner() {
   return (
-    <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-slate-50 flex items-center justify-center">
       <div className="text-center">
-        <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-slate-700 mx-auto mb-4"></div>
+        <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-emerald-600 mx-auto mb-4"></div>
         <p className="text-slate-600 font-medium text-lg">Loading your expenses...</p>
       </div>
     </div>

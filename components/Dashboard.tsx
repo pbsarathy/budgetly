@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useExpenses } from '@/contexts/ExpenseContext';
-import { calculateStats, formatCurrency, getCategoryIcon } from '@/lib/utils';
+import { calculateStats, formatCurrency, getCategoryIcon, generateInsights } from '@/lib/utils';
 import { ExpenseCategory } from '@/types/expense';
 import Charts from './Charts';
 import BudgetChart from './BudgetChart';
@@ -155,32 +155,51 @@ export default function Dashboard() {
       <BudgetChart />
 
       {/* Insights */}
-      {stats.topCategory && (
-        <div className="bg-gradient-to-br from-indigo-600 to-purple-700 rounded-lg shadow-sm p-4 sm:p-6 text-white">
-          <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
-            <span className="text-xl">💡</span>
-            Insights
-          </h2>
-          <div className="space-y-3 text-sm">
-            <p className="bg-white/15 backdrop-blur-sm rounded-lg p-4 border border-white/20">
-              Your top spending category is <strong className="text-yellow-200">{stats.topCategory}</strong> with{' '}
-              <strong className="text-yellow-200">{formatCurrency(stats.categoryBreakdown[stats.topCategory])}</strong>
-            </p>
-            {stats.monthlySpending > 0 && (
-              <p className="bg-white/15 backdrop-blur-sm rounded-lg p-4 border border-white/20">
-                This month you&apos;ve spent{' '}
-                <strong className="text-yellow-200">{formatCurrency(stats.monthlySpending)}</strong> across{' '}
-                {expenses.filter((exp) => {
-                  const now = new Date();
-                  const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
-                  return new Date(exp.date) >= monthStart;
-                }).length}{' '}
-                transactions
-              </p>
-            )}
+      {(() => {
+        const insights = generateInsights(expenses);
+        if (insights.length === 0) return null;
+
+        const getInsightStyles = (type: 'positive' | 'warning' | 'info') => {
+          switch (type) {
+            case 'positive':
+              return 'bg-white/20 border-green-300/30 text-white';
+            case 'warning':
+              return 'bg-white/20 border-yellow-300/30 text-white';
+            case 'info':
+              return 'bg-white/15 border-white/20 text-white';
+          }
+        };
+
+        const renderMarkdown = (text: string) => {
+          return text.split('**').map((part, i) =>
+            i % 2 === 0 ? part : <strong key={i} className="text-yellow-200 font-bold">{part}</strong>
+          );
+        };
+
+        return (
+          <div className="bg-gradient-to-br from-indigo-600 to-purple-700 rounded-lg shadow-sm p-4 sm:p-6 text-white">
+            <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
+              <span className="text-xl">💡</span>
+              Smart Insights
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+              {insights.map((insight, index) => (
+                <div
+                  key={index}
+                  className={`backdrop-blur-sm rounded-lg p-4 border ${getInsightStyles(insight.type)}`}
+                >
+                  <div className="flex items-start gap-3">
+                    <span className="text-2xl flex-shrink-0">{insight.icon}</span>
+                    <p className="leading-relaxed">
+                      {renderMarkdown(insight.message)}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      )}
+        );
+      })()}
     </div>
   );
 }

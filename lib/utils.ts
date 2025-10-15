@@ -264,3 +264,98 @@ export function getCategoryIcon(category: ExpenseCategory): string {
   };
   return icons[category];
 }
+
+export interface Insight {
+  type: 'positive' | 'warning' | 'info';
+  message: string;
+  icon: string;
+}
+
+export function generateInsights(expenses: Expense[]): Insight[] {
+  const insights: Insight[] = [];
+
+  if (expenses.length === 0) return insights;
+
+  const now = new Date();
+  const currentMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+  const lastMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+  const lastMonthEnd = new Date(now.getFullYear(), now.getMonth(), 0);
+
+  // Get current and last month expenses
+  const currentMonthExpenses = expenses.filter(e => new Date(e.date) >= currentMonth);
+  const lastMonthExpenses = expenses.filter(e => new Date(e.date) >= lastMonth && new Date(e.date) <= lastMonthEnd);
+
+  const currentMonthTotal = currentMonthExpenses.reduce((sum, e) => sum + e.amount, 0);
+  const lastMonthTotal = lastMonthExpenses.reduce((sum, e) => sum + e.amount, 0);
+
+  // Calculate category breakdown
+  const categoryTotals: Record<string, number> = {};
+  expenses.forEach(exp => {
+    categoryTotals[exp.category] = (categoryTotals[exp.category] || 0) + exp.amount;
+  });
+
+  const topCategory = Object.entries(categoryTotals).sort((a, b) => b[1] - a[1])[0];
+
+  // Insight 1: Top category
+  if (topCategory) {
+    const percentage = (topCategory[1] / expenses.reduce((sum, e) => sum + e.amount, 0)) * 100;
+    insights.push({
+      type: percentage > 40 ? 'warning' : 'info',
+      message: `Your top spending category is **${topCategory[0]}** at ${formatCurrency(topCategory[1])} (${percentage.toFixed(0)}% of total)`,
+      icon: '📊'
+    });
+  }
+
+  // Insight 2: Month-over-month comparison
+  if (lastMonthTotal > 0 && currentMonthExpenses.length > 0) {
+    const change = ((currentMonthTotal - lastMonthTotal) / lastMonthTotal) * 100;
+    if (Math.abs(change) > 5) {
+      insights.push({
+        type: change > 0 ? 'warning' : 'positive',
+        message: change > 0
+          ? `You're spending **${Math.abs(change).toFixed(0)}% more** this month compared to last month`
+          : `Great job! You're spending **${Math.abs(change).toFixed(0)}% less** this month`,
+        icon: change > 0 ? '📈' : '📉'
+      });
+    }
+  }
+
+  // Insight 3: Transaction frequency
+  if (currentMonthExpenses.length > 0) {
+    const avgPerDay = currentMonthExpenses.length / now.getDate();
+    if (avgPerDay > 3) {
+      insights.push({
+        type: 'info',
+        message: `You're making **${avgPerDay.toFixed(1)} transactions per day** this month`,
+        icon: '💳'
+      });
+    }
+  }
+
+  // Insight 4: Large expenses warning
+  if (expenses.length > 5) {
+    const avgExpense = expenses.reduce((sum, e) => sum + e.amount, 0) / expenses.length;
+    const largeExpenses = currentMonthExpenses.filter(e => e.amount > avgExpense * 2);
+    if (largeExpenses.length > 0) {
+      insights.push({
+        type: 'warning',
+        message: `You have **${largeExpenses.length} large expense${largeExpenses.length > 1 ? 's' : ''}** this month (above ${formatCurrency(avgExpense * 2)})`,
+        icon: '⚠️'
+      });
+    }
+  }
+
+  // Insight 5: Savings category positive reinforcement
+  const savingsAmount = categoryTotals['Savings'] || 0;
+  if (savingsAmount > 0) {
+    const savingsPercentage = (savingsAmount / currentMonthTotal) * 100;
+    insights.push({
+      type: 'positive',
+      message: `Excellent! You've saved **${formatCurrency(savingsAmount)}** (${savingsPercentage.toFixed(0)}% of spending) this month`,
+      icon: '💰'
+    });
+  }
+
+  // Limit to top 4 most relevant insights
+  return insights.slice(0, 4);
+}

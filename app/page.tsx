@@ -56,7 +56,7 @@ export default function Home() {
                 📊
               </div>
               <div>
-                <h1 className="text-lg sm:text-2xl font-bold text-slate-900">Spendora</h1>
+                <h1 className="text-lg sm:text-2xl font-bold text-slate-900">Monetly</h1>
                 <p className="text-xs sm:text-sm text-slate-500 hidden sm:block">Smart expense tracking made simple</p>
               </div>
             </div>
@@ -165,7 +165,7 @@ export default function Home() {
       <footer className="bg-white/60 backdrop-blur-sm border-t border-slate-200 mt-8 sm:mt-12">
         <div className="w-full px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
           <p className="text-center text-slate-500 text-xs sm:text-sm">
-            Built with Next.js, TypeScript, and Tailwind CSS
+            Turning expenses into insights
           </p>
         </div>
       </footer>
