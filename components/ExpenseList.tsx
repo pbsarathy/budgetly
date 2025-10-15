@@ -6,6 +6,7 @@ import { useExpenses } from '@/contexts/ExpenseContext';
 import { formatCurrency, formatDate, getCategoryIcon } from '@/lib/utils';
 import ExpenseForm from './ExpenseForm';
 import EmptyState from './EmptyState';
+import Modal from './Modal';
 
 export default function ExpenseList() {
   const { filteredExpenses, deleteExpense, expenses } = useExpenses();
@@ -24,20 +25,11 @@ export default function ExpenseList() {
 
   const handleEdit = (expense: Expense) => {
     setEditingExpense(expense);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleCancelEdit = () => {
     setEditingExpense(null);
   };
-
-  if (editingExpense) {
-    return (
-      <div>
-        <ExpenseForm editingExpense={editingExpense} onCancel={handleCancelEdit} />
-      </div>
-    );
-  }
 
   if (filteredExpenses.length === 0) {
     // Check if there are any expenses at all
@@ -65,7 +57,17 @@ export default function ExpenseList() {
   }
 
   return (
-    <div className="bg-white/90 backdrop-blur-sm rounded-lg shadow-sm border border-slate-200">
+    <>
+      {/* Edit Modal */}
+      <Modal
+        isOpen={!!editingExpense}
+        onClose={handleCancelEdit}
+        title="Edit Expense"
+      >
+        <ExpenseForm editingExpense={editingExpense || undefined} onCancel={handleCancelEdit} />
+      </Modal>
+
+      <div className="bg-white/90 backdrop-blur-sm rounded-lg shadow-sm border border-slate-200">
       <div className="px-6 py-4 border-b border-slate-200">
         <h2 className="text-xl font-bold text-slate-900">
           Expenses ({filteredExpenses.length})
@@ -142,5 +144,6 @@ export default function ExpenseList() {
         ))}
       </div>
     </div>
+    </>
   );
 }

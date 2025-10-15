@@ -11,6 +11,7 @@ import RecurringExpensesManager from '@/components/RecurringExpenses';
 import FloatingActionButton from '@/components/FloatingActionButton';
 import RecentExpensesQuickAdd from '@/components/RecentExpensesQuickAdd';
 import CurrencySelector from '@/components/CurrencySelector';
+import Modal from '@/components/Modal';
 import { ToastContainer } from '@/components/Toast';
 import { DashboardSkeleton } from '@/components/LoadingSkeleton';
 import { useExpenses } from '@/contexts/ExpenseContext';
@@ -69,9 +70,6 @@ export default function Home() {
   }
 
   const handleAddExpense = () => {
-    if (activeTab !== 'expenses') {
-      setActiveTab('expenses');
-    }
     setShowExpenseForm(true);
   };
 
@@ -137,16 +135,18 @@ export default function Home() {
         </div>
       </header>
 
+      {/* Expense Modal */}
+      <Modal
+        isOpen={showExpenseForm}
+        onClose={() => setShowExpenseForm(false)}
+        title="Add Expense"
+      >
+        <ExpenseForm onClose={() => setShowExpenseForm(false)} />
+      </Modal>
+
       {/* Main Content */}
       <main className="w-full px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
-        <div className="space-y-4 sm:space-y-6">
-          {/* Expense Form - Only shown in All Expenses tab */}
-          {activeTab === 'expenses' && showExpenseForm && (
-            <div className="animate-in slide-in-from-top duration-300">
-              <ExpenseForm onClose={() => setShowExpenseForm(false)} />
-            </div>
-          )}
-
+        <div className="max-w-7xl mx-auto space-y-4 sm:space-y-6">
           {/* Content Views */}
           {activeTab === 'dashboard' && <Dashboard />}
           {activeTab === 'expenses' && (

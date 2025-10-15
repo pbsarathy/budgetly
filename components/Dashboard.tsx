@@ -94,35 +94,50 @@ export default function Dashboard() {
         ))}
       </div>
 
-      {/* Top Categories */}
+      {/* Top Categories - Modern Cards */}
       {topCategories.length > 0 && (
-        <div className="bg-white/90 backdrop-blur-sm rounded-lg shadow-sm border border-slate-200 p-4 sm:p-6">
-          <h2 className="text-xl font-bold text-slate-900 mb-5">
+        <div>
+          <h2 className="text-xl font-bold text-slate-900 mb-4">
             Spending by Category
           </h2>
-
-          <div className="space-y-5">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3 sm:gap-4">
             {topCategories.map(({ category, amount }) => {
               const percentage =
                 stats.totalSpending > 0 ? (amount / stats.totalSpending) * 100 : 0;
 
               return (
-                <div key={category}>
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="flex items-center gap-3">
-                      <span className="text-xl">{getCategoryIcon(category)}</span>
-                      <span className="font-medium text-slate-700">{category}</span>
-                    </div>
-                    <div className="text-right">
-                      <div className="font-semibold text-slate-900">{formatCurrency(amount)}</div>
-                      <div className="text-xs text-slate-500">{percentage.toFixed(1)}%</div>
+                <div
+                  key={category}
+                  className="bg-white rounded-xl shadow-sm border border-slate-200 p-4 hover:shadow-md transition-all hover:scale-105 cursor-pointer"
+                >
+                  {/* Icon */}
+                  <div className="flex justify-center mb-3">
+                    <div className="w-14 h-14 bg-gradient-to-br from-slate-100 to-slate-200 rounded-2xl flex items-center justify-center text-3xl shadow-sm">
+                      {getCategoryIcon(category)}
                     </div>
                   </div>
 
-                  {/* Progress Bar */}
-                  <div className="w-full bg-slate-100 rounded-full h-2">
+                  {/* Category Name */}
+                  <h3 className="text-sm font-semibold text-slate-900 text-center mb-2 truncate">
+                    {category}
+                  </h3>
+
+                  {/* Amount */}
+                  <p className="text-lg font-bold text-slate-900 text-center mb-2">
+                    {formatCurrency(amount)}
+                  </p>
+
+                  {/* Percentage */}
+                  <div className="flex items-center justify-center gap-1 mb-2">
+                    <div className="text-xs font-medium text-slate-500">
+                      {percentage.toFixed(1)}%
+                    </div>
+                  </div>
+
+                  {/* Mini Progress Bar */}
+                  <div className="w-full bg-slate-100 rounded-full h-1.5">
                     <div
-                      className="bg-gradient-to-r from-slate-700 to-slate-900 h-2 rounded-full transition-all duration-500"
+                      className="bg-gradient-to-r from-blue-500 to-blue-600 h-1.5 rounded-full transition-all duration-500"
                       style={{ width: `${percentage}%` }}
                     />
                   </div>
