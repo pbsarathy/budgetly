@@ -129,13 +129,33 @@ export function ExpenseProvider({ children }: { children: ReactNode }) {
   const addExpense = (expense: Expense) => {
     const newExpenses = expenseStorage.add(expense);
     setExpenses(newExpenses);
-    addToast('Expense added successfully!', 'success');
+    addToast('Expense added successfully!', 'success', {
+      label: 'Undo',
+      onClick: () => {
+        const removed = expenseStorage.delete(expense.id);
+        setExpenses(removed);
+        addToast('Expense removed', 'info');
+      },
+    });
   };
 
   const updateExpense = (id: string, updatedExpense: Partial<Expense>) => {
+    const originalExpense = expenses.find((e) => e.id === id);
     const newExpenses = expenseStorage.update(id, updatedExpense);
     setExpenses(newExpenses);
-    addToast('Expense updated successfully!', 'success');
+
+    if (originalExpense) {
+      addToast('Expense updated successfully!', 'success', {
+        label: 'Undo',
+        onClick: () => {
+          const restored = expenseStorage.update(id, originalExpense);
+          setExpenses(restored);
+          addToast('Update reverted', 'info');
+        },
+      });
+    } else {
+      addToast('Expense updated successfully!', 'success');
+    }
   };
 
   const deleteExpense = (id: string) => {

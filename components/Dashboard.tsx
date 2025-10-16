@@ -7,6 +7,7 @@ import { ExpenseCategory } from '@/types/expense';
 import Charts from './Charts';
 import BudgetChart from './BudgetChart';
 import EmptyState from './EmptyState';
+import RecentExpensesQuickAdd from './RecentExpensesQuickAdd';
 import { overallBudgetStorage } from '@/lib/expenseStorage';
 
 interface DashboardProps {
@@ -135,6 +136,9 @@ export default function Dashboard({ onAddExpense }: DashboardProps) {
           ))}
         </div>
       )}
+
+      {/* Recent Expenses Quick Add */}
+      <RecentExpensesQuickAdd />
 
       {/* Summary Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
