@@ -1,12 +1,13 @@
-# Budgetly - Session Notes
+# Monetly - Session Notes
 
 ## 🎯 Current Status
 
-**App Name:** Budgetly (formerly Expense Tracker)
+**App Name:** Monetly (rebranded from Budgetly/Spendora)
 **Version:** 0.1.0
-**Status:** MVP Complete - Ready for P0/P1 Enhancements
-**Build Size:** 227 KB First Load JS
-**Total Lines of Code:** 2,577
+**Status:** Production - Deployed on Vercel with latest UI improvements
+**Build Size:** 230 KB First Load JS
+**GitHub:** https://github.com/pbsarathy/monetly
+**Vercel:** https://vercel.com/partha-sarathys-projects-facc1f87/monetly
 
 ---
 
@@ -326,10 +327,56 @@ npm start                # Production mode
 
 ---
 
-**Last Updated:** End of Day 1 Session
-**Next Session:** Tomorrow - Active through the day
-**Start With:** P0 Item 1 (Floating Action Button)
+## 📝 Recent Session Updates
+
+### Session: October 16, 2025
+
+#### Deployment Fixes:
+1. **Fixed TypeScript Build Errors** (Commit: f514994)
+   - Replaced 'Savings' with 'Investments' in category type definitions
+   - Updated Charts.tsx: CATEGORY_COLORS and categoryTotals
+   - Updated RecurringExpenses.tsx: CATEGORIES array
+   - Build now passes successfully
+
+2. **Previous Vercel Build Fix** (Commit: 8b36d0c)
+   - Removed Turbopack from production build (--turbo flag)
+   - Updated package.json build script to use standard Next.js build
+
+3. **UI Transformation** (Commit: a0f8f2b)
+   - Bold visual design improvements for 9/10 wow factor
+   - Enhanced gradients, shadows, and visual hierarchy
+
+4. **Budget System** (Commit: 76fd81b)
+   - Implemented budget warnings and validation
+   - Added progress tracking and overspending alerts
+
+5. **Form Improvements** (Commit: 4671c0a)
+   - Added required field markers (red asterisks)
+   - Implemented recurring expense checkbox
+   - Normalized form sizes for consistency
+
+#### Deployment Status:
+- ✅ Latest commit (f514994) pushed to GitHub
+- ✅ Vercel deployment triggered automatically
+- ✅ Build should now succeed with TypeScript fixes
+- ✅ All UI improvements from previous sessions included
+
+#### Git Configuration:
+- Updated remote URL from budgetly to monetly
+- Main branch synced with remote
+- Clean working tree
+- **Pre-push Hook Added:** Build validation before every push to production
+
+#### Pre-Push Build Validation:
+- Git pre-push hook created at `.git/hooks/pre-push`
+- Automatically runs `npm run build` before each push
+- Prevents broken builds from being deployed to Vercel
+- Push is aborted if build fails with clear error message
+- Ensures production always has working code
 
 ---
 
-Good luck tomorrow! 🚀
+**Last Updated:** October 16, 2025 - 09:35 AM
+**Current Focus:** Addressing Claude Code questions about sub-agents
+**Deployment:** Live on Vercel (pending latest build completion)
+**Next Task:** Answer user's clarifications about Claude Code usage
