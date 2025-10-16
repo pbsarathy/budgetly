@@ -10,10 +10,14 @@ import BudgetManager from '@/components/BudgetManager';
 import RecurringExpensesManager from '@/components/RecurringExpenses';
 import FloatingActionButton from '@/components/FloatingActionButton';
 import CurrencySelector from '@/components/CurrencySelector';
+import UserMenu from '@/components/UserMenu';
 import Modal from '@/components/Modal';
 import { ToastContainer } from '@/components/Toast';
 import { DashboardSkeleton } from '@/components/LoadingSkeleton';
 import { useExpenses } from '@/contexts/ExpenseContext';
+import { useAuth } from '@/contexts/AuthContext';
+import LoginPage from '@/components/LoginPage';
+import DataMigrationModal from '@/components/DataMigrationModal';
 
 type TabType = 'dashboard' | 'expenses' | 'budgets' | 'recurring';
 
@@ -41,11 +45,18 @@ const TAB_STYLES = {
 };
 
 export default function Home() {
+  const { user, loading: authLoading } = useAuth();
   const { isLoading, toasts, removeToast } = useExpenses();
   const [activeTab, setActiveTab] = useState<TabType>('dashboard');
   const [showExpenseForm, setShowExpenseForm] = useState(false);
 
-  if (isLoading) {
+  // Show login page if not authenticated
+  if (!authLoading && !user) {
+    return <LoginPage />;
+  }
+
+  // Show loading skeleton while auth or data is loading
+  if (authLoading || isLoading) {
     return (
       <div className="min-h-screen">
         <header className="bg-white/80 backdrop-blur-sm border-b border-slate-200 sticky top-0 z-10 shadow-sm">
@@ -108,8 +119,9 @@ export default function Home() {
             </div>
 
             {/* Action Buttons */}
-            <div className="flex items-center gap-3 sm:gap-3 flex-shrink-0">
+            <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
               <CurrencySelector />
+              <UserMenu />
               <button
                 onClick={handleAddExpense}
                 className="relative px-4 py-3 sm:px-6 sm:py-3 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700 transition-all font-bold shadow-xl hover:shadow-2xl flex items-center gap-1.5 text-sm sm:text-base whitespace-nowrap transform hover:scale-105 overflow-hidden group"
@@ -194,6 +206,9 @@ export default function Home() {
 
       {/* Floating Action Button */}
       <FloatingActionButton onClick={handleAddExpense} />
+
+      {/* Data Migration Modal */}
+      <DataMigrationModal />
 
       {/* Toast Notifications */}
       <ToastContainer toasts={toasts} onClose={removeToast} />
