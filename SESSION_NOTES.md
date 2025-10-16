@@ -912,7 +912,13 @@ User asked about using **Haiku** to save tokens. Recommendation: **STAY WITH SON
 - **Protection:** All routes check authentication
 - **Error Handling:** Toast notifications for all failures
 
-#### 🎯 Known Issues
+#### 🎯 Known Issues (RESOLVED!)
+- ✅ **Google OAuth Redirect Bug** - FIXED! Users were stuck in login loop after OAuth
+  - **Problem:** Callback route used wrong Supabase client (`@supabase/auth-helpers-nextjs`)
+  - **Solution:** Updated to use standard `@supabase/supabase-js` client (same as rest of app)
+  - **Fix:** app/auth/callback/route.ts:1-37
+  - **Status:** Build passing, ready to test
+
 - ⚠️ **Google OAuth Branding** - Shows "netothdiyhjeiyvxwqbx.supabase.co" instead of "Monetly"
   - **Fix:** User needs to configure OAuth consent screen in Google Cloud Console
   - Update app name to "Monetly"
