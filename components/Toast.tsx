@@ -37,7 +37,7 @@ export function ToastComponent({ toast, onClose }: ToastComponentProps) {
       case 'error':
         return 'bg-red-600 text-white';
       case 'info':
-        return 'bg-blue-600 text-white';
+        return 'bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white';
       default:
         return 'bg-slate-600 text-white';
     }

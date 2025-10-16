@@ -96,18 +96,20 @@ export default function Home() {
             </div>
 
             {/* Action Buttons */}
-            <div className="flex items-center gap-1.5 sm:gap-3 flex-shrink-0">
+            <div className="flex items-center gap-3 sm:gap-3 flex-shrink-0">
               <CurrencySelector />
               <button
                 onClick={handleAddExpense}
-                className="relative px-3 py-2.5 sm:px-6 sm:py-3 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700 transition-all font-bold shadow-xl hover:shadow-2xl flex items-center gap-1.5 text-sm sm:text-base whitespace-nowrap transform hover:scale-105 overflow-hidden group"
+                className="relative px-4 py-3 sm:px-6 sm:py-3 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700 transition-all font-bold shadow-xl hover:shadow-2xl flex items-center gap-1.5 text-sm sm:text-base whitespace-nowrap transform hover:scale-105 overflow-hidden group"
               >
                 <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform"></div>
                 <span className="relative text-xl sm:text-2xl">+</span>
                 <span className="relative hidden sm:inline">Add Expense</span>
-                <span className="relative sm:hidden text-xs font-extrabold">Add</span>
+                <span className="relative sm:hidden text-sm font-extrabold">Add</span>
               </button>
-              <ExportButton />
+              <div className="hidden sm:block">
+                <ExportButton />
+              </div>
             </div>
           </div>
 
@@ -131,8 +133,7 @@ export default function Home() {
                   `}
                 >
                   <span className="text-base sm:text-xl filter drop-shadow">{styles.icon}</span>
-                  <span className="hidden xs:inline tracking-wide">{tab.charAt(0).toUpperCase() + tab.slice(1)}</span>
-                  <span className="xs:hidden tracking-wide">{tab.charAt(0).toUpperCase() + tab.slice(1).substring(0, 3)}</span>
+                  <span className="tracking-wide">{tab.charAt(0).toUpperCase() + tab.slice(1)}</span>
                 </button>
               );
             })}

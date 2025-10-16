@@ -1,8 +1,29 @@
 import { Expense, ExpenseCategory, ExpenseStats } from '@/types/expense';
 import { currencyStorage, CURRENCIES, Currency } from './currencyStorage';
 
+/**
+ * Generates a cryptographically secure random ID
+ * Uses Web Crypto API for true randomness (not Math.random)
+ */
 export function generateId(): string {
-  return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+  // Use crypto.getRandomValues for cryptographically secure random values
+  const array = new Uint8Array(16);
+  crypto.getRandomValues(array);
+
+  // Convert to hex string
+  return Array.from(array, byte => byte.toString(16).padStart(2, '0')).join('');
+}
+
+/**
+ * Sanitizes user input to prevent XSS and injection attacks
+ * Removes HTML-like characters and normalizes Unicode
+ */
+export function sanitizeInput(input: string, maxLength: number = 500): string {
+  return input
+    .trim()
+    .slice(0, maxLength)
+    .replace(/[<>]/g, '') // Remove HTML-like characters
+    .normalize('NFKC'); // Normalize Unicode to prevent homograph attacks
 }
 
 export function formatCurrency(amount: number, currencyCode?: Currency): string {
@@ -83,18 +104,35 @@ export function calculateStats(expenses: Expense[]): ExpenseStats {
   };
 }
 
+/**
+ * Sanitizes a cell value for CSV export to prevent formula injection attacks
+ * Prepends single quote to values starting with =, +, -, @ to prevent formula execution
+ */
+function sanitizeCSVCell(value: string): string {
+  const stringValue = String(value);
+
+  // Check if value starts with formula characters
+  if (/^[=+\-@\t\r]/.test(stringValue)) {
+    // Prepend with single quote to treat as text
+    return `"'${stringValue.replace(/"/g, '""')}"`;
+  }
+
+  // Escape quotes and wrap in quotes
+  return `"${stringValue.replace(/"/g, '""')}"`;
+}
+
 export function exportToCSV(expenses: Expense[]): string {
   const headers = ['Date', 'Category', 'Description', 'Amount'];
   const rows = expenses.map((exp) => [
-    formatDate(exp.date),
-    exp.category,
-    exp.description,
-    exp.amount.toString(),
+    sanitizeCSVCell(formatDate(exp.date)),
+    sanitizeCSVCell(exp.category),
+    sanitizeCSVCell(exp.description),  // CRITICAL: Sanitize user input
+    sanitizeCSVCell(exp.amount.toString()),
   ]);
 
   const csvContent = [
     headers.join(','),
-    ...rows.map((row) => row.map((cell) => `"${cell}"`).join(',')),
+    ...rows.map((row) => row.join(',')),
   ].join('\n');
 
   return csvContent;

@@ -178,7 +178,7 @@ export default function RecurringExpensesManager() {
                     <span className="px-2 py-0.5 bg-slate-200 text-slate-700 text-xs font-medium">
                       {recurring.category}
                     </span>
-                    <span className="px-2 py-0.5 bg-blue-100 text-blue-700 text-xs font-medium">
+                    <span className="px-2 py-0.5 bg-gradient-to-r from-indigo-100 via-purple-100 to-pink-100 text-purple-700 text-xs font-medium">
                       {recurring.frequency}
                     </span>
                   </div>
@@ -194,7 +194,7 @@ export default function RecurringExpensesManager() {
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => toggleActive(recurring.id, recurring.isActive)}
-                    className={`px-3 py-1 text-sm font-medium transition-colors ${
+                    className={`px-4 py-2.5 sm:px-3 sm:py-1 text-sm font-medium transition-colors min-h-[44px] sm:min-h-0 ${
                       recurring.isActive
                         ? 'bg-green-100 text-green-700 hover:bg-green-200'
                         : 'bg-slate-200 text-slate-600 hover:bg-slate-300'
@@ -205,10 +205,10 @@ export default function RecurringExpensesManager() {
                   </button>
                   <button
                     onClick={() => deleteRecurringExpense(recurring.id)}
-                    className="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors"
+                    className="p-3 sm:p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors min-w-[44px] min-h-[44px] sm:min-w-0 sm:min-h-0 flex items-center justify-center"
                     title="Delete"
                   >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-5 h-5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                     </svg>
                   </button>
@@ -219,8 +219,8 @@ export default function RecurringExpensesManager() {
         </div>
       )}
 
-      <div className="mt-4 p-3 bg-blue-50 border border-blue-200">
-        <p className="text-sm text-blue-800">
+      <div className="mt-4 p-3 bg-gradient-to-r from-indigo-50 via-purple-50 to-pink-50 border border-purple-200">
+        <p className="text-sm text-purple-800">
           <strong>💡 Tip:</strong> Recurring expenses are automatically added based on their frequency. The app will create them when you visit the page.
         </p>
       </div>

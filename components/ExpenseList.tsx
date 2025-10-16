@@ -264,7 +264,7 @@ export default function ExpenseList() {
                       {categoryGroup.items.map((expense) => (
                         <div
                           key={expense.id}
-                          className={`p-3 hover:bg-slate-50 transition-colors border-l-2 border-slate-200 ${
+                          className={`p-3 hover:bg-gradient-to-r hover:from-indigo-50/50 hover:via-purple-50/50 hover:to-pink-50/50 transition-all duration-200 border-l-2 border-slate-200 hover:border-l-4 hover:border-purple-400 hover:shadow-sm ${
                             deletingId === expense.id ? 'opacity-50' : ''
                           }`}
                         >
@@ -276,7 +276,7 @@ export default function ExpenseList() {
                                   {expense.description}
                                 </h4>
                                 {expense.subcategory && (
-                                  <span className="px-1.5 py-0.5 bg-blue-100 text-blue-700 text-xs font-medium whitespace-nowrap">
+                                  <span className="px-1.5 py-0.5 bg-gradient-to-r from-indigo-100 via-purple-100 to-pink-100 text-purple-700 text-xs font-medium whitespace-nowrap">
                                     {expense.subcategory}
                                   </span>
                                 )}
@@ -295,10 +295,10 @@ export default function ExpenseList() {
                               <div className="flex gap-1">
                                 <button
                                   onClick={() => handleEdit(expense)}
-                                  className="p-1.5 text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors"
+                                  className="p-3 sm:p-1.5 text-slate-400 hover:text-purple-600 hover:bg-gradient-to-r hover:from-indigo-50 hover:via-purple-50 hover:to-pink-50 transition-colors min-w-[44px] min-h-[44px] sm:min-w-0 sm:min-h-0 flex items-center justify-center"
                                   title="Edit"
                                 >
-                                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <svg className="w-5 h-5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                   </svg>
                                 </button>
@@ -306,10 +306,10 @@ export default function ExpenseList() {
                                 <button
                                   onClick={() => handleDelete(expense.id)}
                                   disabled={deletingId === expense.id}
-                                  className="p-1.5 text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors disabled:opacity-50"
+                                  className="p-3 sm:p-1.5 text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors disabled:opacity-50 min-w-[44px] min-h-[44px] sm:min-w-0 sm:min-h-0 flex items-center justify-center"
                                   title="Delete"
                                 >
-                                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <svg className="w-5 h-5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                   </svg>
                                 </button>

@@ -22,7 +22,7 @@ export default function EmptyState({ icon, title, description, action }: EmptySt
         {action && (
           <button
             onClick={action.onClick}
-            className="mt-6 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800 transition-all font-medium shadow-md hover:shadow-lg"
+            className="mt-6 px-6 py-3 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700 transition-all font-medium shadow-md shadow-purple-500/30 hover:shadow-lg hover:shadow-purple-500/50"
           >
             {action.label}
           </button>

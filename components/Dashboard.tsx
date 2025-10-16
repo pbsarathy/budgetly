@@ -162,7 +162,7 @@ export default function Dashboard({ onAddExpense }: DashboardProps) {
       {/* Top Categories - Modern Cards */}
       {topCategories.length > 0 && (
         <div>
-          <h2 className="text-2xl sm:text-3xl font-extrabold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-6">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-6 drop-shadow-sm">
             Spending by Category
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 sm:gap-5">

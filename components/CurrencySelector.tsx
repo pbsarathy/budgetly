@@ -30,10 +30,10 @@ export default function CurrencySelector({ onCurrencyChange }: CurrencySelectorP
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1.5 sm:py-2 bg-white border border-slate-300 hover:bg-slate-50 transition-colors text-xs sm:text-sm font-medium text-slate-700"
+        className="flex items-center gap-2 px-3 py-2.5 sm:px-3 sm:py-2 bg-white border border-slate-300 hover:bg-slate-50 transition-colors text-sm sm:text-sm font-medium text-slate-700"
         aria-label="Select currency"
       >
-        <span className="text-base sm:text-lg">{currentCurrency.symbol}</span>
+        <span className="text-lg sm:text-lg">{currentCurrency.symbol}</span>
         <span className="hidden sm:inline">{currentCurrency.code}</span>
         <span className="text-slate-400">▼</span>
       </button>
@@ -61,9 +61,9 @@ export default function CurrencySelector({ onCurrencyChange }: CurrencySelectorP
                     <button
                       key={currency}
                       onClick={() => handleCurrencyChange(currency)}
-                      className={`w-full flex items-center gap-3 px-3 py-2 transition-colors ${
+                      className={`w-full flex items-center gap-3 px-3 py-2.5 transition-all ${
                         isSelected
-                          ? 'bg-blue-50 text-blue-700 font-semibold'
+                          ? 'bg-gradient-to-r from-indigo-50 via-purple-50 to-pink-50 text-purple-700 font-semibold border-l-2 border-purple-500'
                           : 'text-slate-700 hover:bg-slate-50'
                       }`}
                     >
@@ -73,7 +73,7 @@ export default function CurrencySelector({ onCurrencyChange }: CurrencySelectorP
                         <p className="text-xs text-slate-500">{info.name}</p>
                       </div>
                       {isSelected && (
-                        <span className="text-blue-600 text-lg">✓</span>
+                        <span className="text-purple-600 text-lg">✓</span>
                       )}
                     </button>
                   );

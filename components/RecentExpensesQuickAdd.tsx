@@ -61,7 +61,7 @@ export default function RecentExpensesQuickAdd() {
           <button
             key={`${expense.id}-${index}`}
             onClick={() => handleQuickAdd(expense)}
-            className="w-full flex items-center justify-between p-3 border-2 border-slate-200 hover:border-blue-500 hover:bg-blue-50 transition-all group"
+            className="w-full flex items-center justify-between p-3 border-2 border-slate-200 hover:border-purple-500 hover:bg-gradient-to-r hover:from-indigo-50 hover:via-purple-50 hover:to-pink-50 transition-all group"
           >
             <div className="flex items-center gap-3 min-w-0 flex-1">
               <span className="text-2xl flex-shrink-0">{getCategoryIcon(expense.category)}</span>
@@ -77,7 +77,7 @@ export default function RecentExpensesQuickAdd() {
               <span className="font-bold text-slate-900 text-sm">
                 {formatCurrency(expense.amount)}
               </span>
-              <span className="text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity text-xl">
+              <span className="text-purple-600 opacity-0 group-hover:opacity-100 transition-opacity text-xl">
                 +
               </span>
             </div>

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Expense, ExpenseCategory, BillSubcategory, InvestmentSubcategory, RecurringExpense } from '@/types/expense';
+import { Expense, ExpenseCategory, BillSubcategory, InvestmentSubcategory } from '@/types/expense';
 import { generateId } from '@/lib/utils';
 import { useExpenses } from '@/contexts/ExpenseContext';
 
@@ -396,13 +396,13 @@ export default function ExpenseForm({ editingExpense, onCancel, onClose }: Expen
       </div>
 
       {/* Recurring Expense Checkbox */}
-      <div className="mt-4 p-3 bg-blue-50 border border-blue-200">
+      <div className="mt-4 p-3 bg-gradient-to-r from-indigo-50 via-purple-50 to-pink-50 border border-purple-200">
         <label className="flex items-start gap-3 cursor-pointer">
           <input
             type="checkbox"
             checked={isRecurring}
             onChange={(e) => setIsRecurring(e.target.checked)}
-            className="mt-0.5 w-4 h-4 text-blue-600 border-slate-300 focus:ring-2 focus:ring-blue-500"
+            className="mt-0.5 w-4 h-4 text-purple-600 border-slate-300 focus:ring-2 focus:ring-purple-500"
           />
           <div className="flex-1">
             <span className="text-sm font-medium text-slate-900">Make this a recurring expense</span>
@@ -422,7 +422,7 @@ export default function ExpenseForm({ editingExpense, onCancel, onClose }: Expen
               id="frequency"
               value={recurringFrequency}
               onChange={(e) => setRecurringFrequency(e.target.value as 'daily' | 'weekly' | 'monthly' | 'yearly')}
-              className="w-full px-3 py-2.5 border border-slate-300 focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all text-sm"
+              className="w-full px-3 py-2.5 border border-slate-300 focus:ring-2 focus:ring-purple-600 focus:border-transparent transition-all text-sm"
               required
             >
               <option value="daily">Daily</option>
@@ -451,7 +451,7 @@ export default function ExpenseForm({ editingExpense, onCancel, onClose }: Expen
         <button
           type="submit"
           disabled={isSubmitting}
-          className="px-6 py-3 sm:px-10 sm:py-3.5 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold shadow-md hover:shadow-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
+          className="px-6 py-3 sm:px-10 sm:py-3.5 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700 text-white font-semibold shadow-md shadow-purple-500/30 hover:shadow-lg hover:shadow-purple-500/50 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
         >
           {isSubmitting ? 'Saving...' : editingExpense ? 'Update' : 'Add Expense'}
         </button>
