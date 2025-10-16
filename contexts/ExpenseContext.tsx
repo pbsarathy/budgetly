@@ -53,11 +53,19 @@ export function ExpenseProvider({ children }: { children: ReactNode }) {
 
       try {
         setIsLoading(true);
+        console.log('🔄 Loading data for user:', user.id, user.email);
+
         const [loadedExpenses, loadedBudgets, loadedRecurring] = await Promise.all([
           supabaseStorage.getExpenses(user.id),
           supabaseStorage.getBudgets(user.id),
           supabaseStorage.getRecurringExpenses(user.id),
         ]);
+
+        console.log('✅ Data loaded successfully:', {
+          expenses: loadedExpenses.length,
+          budgets: loadedBudgets.length,
+          recurring: loadedRecurring.length
+        });
 
         setExpenses(loadedExpenses);
 
@@ -77,7 +85,11 @@ export function ExpenseProvider({ children }: { children: ReactNode }) {
         setBudgets(currentBudgets);
         setRecurringExpenses(loadedRecurring);
       } catch (error) {
-        console.error('Error loading data:', error);
+        console.error('❌ Error loading data:', error);
+        console.error('Error details:', {
+          message: (error as Error).message,
+          user: { id: user.id, email: user.email }
+        });
         addToast('Failed to load data from server', 'error');
       } finally {
         setIsLoading(false);
@@ -198,7 +210,9 @@ export function ExpenseProvider({ children }: { children: ReactNode }) {
     }
 
     try {
+      console.log('➕ Adding expense:', { user: user.email, expense });
       const added = await supabaseStorage.addExpense(user.id, expense);
+      console.log('✅ Expense added successfully:', added);
       setExpenses((prev) => [added, ...prev]);
       addToast('Expense added successfully!', 'success', {
         label: 'Undo',
@@ -214,7 +228,14 @@ export function ExpenseProvider({ children }: { children: ReactNode }) {
         },
       });
     } catch (error) {
-      console.error('Error adding expense:', error);
+      console.error('❌ Error adding expense:', error);
+      console.error('Error details:', {
+        message: (error as Error).message,
+        code: (error as any).code,
+        details: (error as any).details,
+        hint: (error as any).hint,
+        user: { id: user.id, email: user.email }
+      });
       addToast('Failed to add expense', 'error');
     }
   };
