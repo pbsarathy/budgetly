@@ -75,20 +75,31 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Header */}
-      <header className="bg-white/95 backdrop-blur-md border-b-2 border-white/20 sticky top-0 z-10 shadow-xl">
+      <header className="bg-white/95 backdrop-blur-md border-b-2 border-white/20 sticky top-0 z-50 shadow-xl">
         <div className="w-full px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
           <div className="flex items-center justify-between gap-2 sm:gap-4">
             {/* Logo and Title */}
             <div className="flex items-center gap-3 sm:gap-5 min-w-0">
-              {/* Glassmorphic Logo */}
+              {/* Smart Wallet Logo */}
               <div className="relative group">
                 <div className="absolute inset-0 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 opacity-75 group-hover:opacity-100 blur transition-opacity"></div>
-                <div className="relative bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center text-2xl sm:text-3xl shadow-2xl flex-shrink-0 transform group-hover:scale-105 transition-transform">
-                  <span className="filter drop-shadow-lg">💰</span>
+                <div className="relative bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 w-12 h-12 sm:w-16 sm:h-16 rounded-xl flex items-center justify-center shadow-2xl flex-shrink-0 transform group-hover:scale-105 transition-transform">
+                  <svg className="w-7 h-7 sm:w-10 sm:h-10 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    {/* Smart Wallet icon */}
+                    <rect x="3" y="6" width="18" height="14" rx="2" stroke="currentColor" strokeWidth="2"/>
+                    <path d="M3 10h18" stroke="currentColor" strokeWidth="2"/>
+                    <circle cx="17" cy="15" r="1.5" fill="currentColor"/>
+                    <path d="M7 14h4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                  </svg>
                 </div>
               </div>
               <div className="min-w-0">
-                <h1 className="text-2xl sm:text-4xl font-extrabold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent truncate">
+                <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 truncate" style={{
+                  background: 'linear-gradient(to right, #4f46e5, #9333ea, #ec4899)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text'
+                }}>
                   Monetly
                 </h1>
                 <p className="text-xs sm:text-sm font-medium text-slate-600 hidden sm:block mt-0.5">Turning expenses into insights ✨</p>
@@ -107,9 +118,6 @@ export default function Home() {
                 <span className="relative hidden sm:inline">Add Expense</span>
                 <span className="relative sm:hidden text-sm font-extrabold">Add</span>
               </button>
-              <div className="hidden sm:block">
-                <ExportButton />
-              </div>
             </div>
           </div>
 
@@ -151,13 +159,18 @@ export default function Home() {
       </Modal>
 
       {/* Main Content */}
-      <main className="w-full px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
+      <main className="w-full px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8 pb-24 sm:pb-8">
         <div className="max-w-7xl mx-auto space-y-4 sm:space-y-6">
           {/* Content Views */}
           {activeTab === 'dashboard' && <Dashboard onAddExpense={handleAddExpense} />}
           {activeTab === 'expenses' && (
             <div className="space-y-4 sm:space-y-6">
-              <ExpenseFilters />
+              <div className="flex items-center justify-between gap-4">
+                <div className="flex-1">
+                  <ExpenseFilters />
+                </div>
+                <ExportButton />
+              </div>
               <ExpenseList />
             </div>
           )}
@@ -169,12 +182,19 @@ export default function Home() {
       {/* Footer */}
       <footer className="bg-white/90 backdrop-blur-md border-t-2 border-white/30 mt-12 sm:mt-16 shadow-2xl">
         <div className="w-full px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-          <p className="text-center text-lg sm:text-xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-            Turning expenses into insights ✨
-          </p>
-          <p className="text-center text-xs sm:text-sm text-slate-500 mt-2">
-            Made with 💜 by Claude Code
-          </p>
+          <div className="max-w-7xl mx-auto">
+            {/* Export Button in Footer */}
+            <div className="flex justify-center mb-6">
+              <ExportButton />
+            </div>
+
+            <p className="text-center text-lg sm:text-xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+              Turning expenses into insights ✨
+            </p>
+            <p className="text-center text-xs sm:text-sm text-slate-500 mt-2">
+              Made with 💜 by Claude Code
+            </p>
+          </div>
         </div>
       </footer>
 

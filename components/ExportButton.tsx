@@ -46,10 +46,11 @@ export default function ExportButton() {
       <button
         onClick={() => setShowMenu(!showMenu)}
         disabled={isExporting || filteredExpenses.length === 0}
-        className="px-4 py-2.5 bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-medium flex items-center gap-2"
+        className="px-3 py-2.5 sm:px-4 sm:py-2.5 bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-medium flex items-center gap-1.5 sm:gap-2 min-w-[44px] min-h-[44px] sm:min-w-0 sm:min-h-0 justify-center"
+        aria-label="Export expenses"
       >
         <svg
-          className="w-4 h-4"
+          className="w-5 h-5 sm:w-4 sm:h-4"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -61,9 +62,9 @@ export default function ExportButton() {
             d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
           />
         </svg>
-        {isExporting ? 'Exporting...' : 'Export'}
+        <span className="hidden sm:inline">{isExporting ? 'Exporting...' : 'Export'}</span>
         <svg
-          className={`w-4 h-4 transition-transform ${showMenu ? 'rotate-180' : ''}`}
+          className={`w-4 h-4 transition-transform hidden sm:block ${showMenu ? 'rotate-180' : ''}`}
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"

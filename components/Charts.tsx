@@ -82,7 +82,6 @@ export default function Charts() {
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
       {/* Pie Chart - Category Breakdown */}
       <div className="bg-white/90 backdrop-blur-sm shadow-sm border border-slate-200 p-6">
-        <h3 className="text-lg font-bold text-slate-900 mb-4">Spending by Category</h3>
         {pieData.length > 0 ? (
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>
@@ -90,17 +89,22 @@ export default function Charts() {
                 data={pieData}
                 cx="50%"
                 cy="50%"
-                labelLine={false}
-                label={(props: Record<string, unknown>) => `${props.name}: ${((props.percent as number) * 100).toFixed(0)}%`}
-                outerRadius={80}
+                labelLine={true}
+                label={(props: Record<string, unknown>) => {
+                  const percent = ((props.percent as number) * 100).toFixed(0);
+                  return `${props.name}: ${percent}%`;
+                }}
+                outerRadius={90}
                 fill="#8884d8"
                 dataKey="value"
+                stroke="#fff"
+                strokeWidth={2}
               >
                 {pieData.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={entry.color} />
                 ))}
               </Pie>
-              <Tooltip formatter={(value: number) => `Rs ${value.toFixed(0)}`} />
+              <Tooltip formatter={(value: number) => `₹${value.toFixed(0)}`} />
             </PieChart>
           </ResponsiveContainer>
         ) : (
