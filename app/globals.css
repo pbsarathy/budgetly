@@ -1,5 +1,41 @@
 @import "tailwindcss";
 
+/* ======================================
+   DESIGN SYSTEM - COLOR PALETTE
+   ====================================== */
+:root {
+  /* Primary Accent Color (Teal) */
+  --color-primary-accent: #007A99;
+  --color-primary-accent-hover: #006080;
+  --color-primary-accent-light: #009fcc;
+
+  /* Background Colors */
+  --color-background-soft: #F7F7F9;
+  --color-background-white: #FFFFFF;
+  --color-background-card: rgba(255, 255, 255, 0.95);
+
+  /* Status Colors */
+  --color-status-positive: #4CAF50;  /* Green - Income/Positive */
+  --color-status-negative: #E53935;  /* Red - Expense/Negative */
+  --color-status-warning: #FFB300;   /* Yellow/Orange - Warning */
+
+  /* Chart Colors */
+  --color-chart-primary: #007A99;
+  --color-chart-secondary: #4CAF50;
+  --color-chart-tertiary: #FFB300;
+  --color-chart-quaternary: #E53935;
+
+  /* Typography */
+  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -11,9 +47,7 @@ html {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: var(--font-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* Bold vibrant gradient background */
@@ -22,6 +56,25 @@ body {
   min-height: 100vh;
   font-size: 16px;
   line-height: 1.6;
+  /* Enable tabular figures for better number alignment */
+  font-variant-numeric: tabular-nums;
+}
+
+/* Tabular figures for numbers - consistent digit width */
+.tabular-nums,
+.amount,
+.currency,
+[class*="total"],
+[class*="budget"],
+[class*="expense"] {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* Semi-bold (600) for financial totals */
+.financial-total {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
 }
 
 /* Custom scrollbar with brand colors */

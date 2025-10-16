@@ -221,8 +221,10 @@ CREATE TRIGGER set_updated_at_recurring
   FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
 
 -- Grant necessary permissions
-GRANT USAGE ON SCHEMA public TO postgres, anon, authenticated;
+-- SECURITY: Only authenticated users should access data
+-- Anonymous users have NO access to tables (app requires Google OAuth)
+GRANT USAGE ON SCHEMA public TO postgres, authenticated;
 GRANT ALL ON ALL TABLES IN SCHEMA public TO postgres, authenticated;
-GRANT SELECT ON ALL TABLES IN SCHEMA public TO anon;
+-- REMOVED: GRANT SELECT ON ALL TABLES IN SCHEMA public TO anon;
+-- Anonymous users cannot read any data - enforces authentication requirement
 GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO postgres, authenticated;
-GRANT USAGE ON ALL SEQUENCES IN SCHEMA public TO anon;

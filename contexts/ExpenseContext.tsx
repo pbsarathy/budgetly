@@ -1,11 +1,14 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, useRef, ReactNode } from 'react';
 import { Expense, ExpenseFilters, Budget, RecurringExpense } from '@/types/expense';
 import { useAuth } from './AuthContext';
 import * as supabaseStorage from '@/lib/supabaseStorage';
 import { generateId } from '@/lib/utils';
 import { Toast, ToastType } from '@/components/Toast';
+
+// Rate limiting: Prevent API spam (500ms cooldown between operations)
+const THROTTLE_MS = 500;
 
 interface ExpenseContextType {
   expenses: Expense[];
@@ -42,6 +45,9 @@ export function ExpenseProvider({ children }: { children: ReactNode }) {
   });
   const [isLoading, setIsLoading] = useState(true);
   const [toasts, setToasts] = useState<Toast[]>([]);
+
+  // Rate limiting: Track last operation time to prevent API spam
+  const lastOperationTime = useRef<number>(0);
 
   // Load all data from Supabase when user is authenticated
   useEffect(() => {
@@ -203,11 +209,29 @@ export function ExpenseProvider({ children }: { children: ReactNode }) {
     setToasts((prev) => prev.filter((toast) => toast.id !== id));
   };
 
+  // Rate limiting: Check if enough time has passed since last operation
+  const isThrottled = (): boolean => {
+    const now = Date.now();
+    const timeSinceLastOp = now - lastOperationTime.current;
+
+    if (timeSinceLastOp < THROTTLE_MS) {
+      const remainingMs = THROTTLE_MS - timeSinceLastOp;
+      addToast(`Please wait ${Math.ceil(remainingMs / 100) / 10}s before trying again`, 'error');
+      return true;
+    }
+
+    lastOperationTime.current = now;
+    return false;
+  };
+
   const addExpense = async (expense: Expense) => {
     if (!user) {
       addToast('Please sign in to add expenses', 'error');
       return;
     }
+
+    // Rate limiting check
+    if (isThrottled()) return;
 
     try {
       console.log('➕ Adding expense:', { user: user.email, expense });
@@ -245,6 +269,9 @@ export function ExpenseProvider({ children }: { children: ReactNode }) {
       addToast('Please sign in to update expenses', 'error');
       return;
     }
+
+    // Rate limiting check
+    if (isThrottled()) return;
 
     const originalExpense = expenses.find((e) => e.id === id);
 
@@ -284,6 +311,9 @@ export function ExpenseProvider({ children }: { children: ReactNode }) {
       addToast('Please sign in to delete expenses', 'error');
       return;
     }
+
+    // Rate limiting check
+    if (isThrottled()) return;
 
     const deletedExpense = expenses.find((e) => e.id === id);
 

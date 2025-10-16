@@ -14,12 +14,14 @@ import UserMenu from '@/components/UserMenu';
 import Modal from '@/components/Modal';
 import { ToastContainer } from '@/components/Toast';
 import { DashboardSkeleton } from '@/components/LoadingSkeleton';
+import BottomNav from '@/components/BottomNav';
+import SecuritySettings from '@/components/SecuritySettings';
 import { useExpenses } from '@/contexts/ExpenseContext';
 import { useAuth } from '@/contexts/AuthContext';
 import LoginPage from '@/components/LoginPage';
 import DataMigrationModal from '@/components/DataMigrationModal';
 
-type TabType = 'dashboard' | 'expenses' | 'budgets' | 'recurring';
+type TabType = 'dashboard' | 'expenses' | 'budgets' | 'recurring' | 'settings';
 
 const TAB_STYLES = {
   dashboard: {
@@ -42,6 +44,11 @@ const TAB_STYLES = {
     hover: 'hover:bg-gradient-to-br hover:from-orange-50 hover:to-red-50',
     icon: '🔄',
   },
+  settings: {
+    active: 'bg-gradient-to-br from-slate-600 to-slate-700 text-white shadow-2xl',
+    hover: 'hover:bg-gradient-to-br hover:from-slate-50 hover:to-slate-100',
+    icon: '⚙️',
+  },
 };
 
 export default function Home() {
@@ -58,8 +65,8 @@ export default function Home() {
   // Show loading skeleton while auth or data is loading
   if (authLoading || isLoading) {
     return (
-      <div className="min-h-screen">
-        <header className="bg-white/80 backdrop-blur-sm border-b border-slate-200 sticky top-0 z-10 shadow-sm">
+      <div className="h-screen flex flex-col overflow-hidden">
+        <header className="bg-white/80 backdrop-blur-sm border-b border-slate-200 z-10 shadow-sm flex-shrink-0">
           <div className="w-full px-4 sm:px-6 lg:px-8 py-3 sm:py-5">
             <div className="flex items-center gap-2 sm:gap-4">
               <div className="bg-gradient-to-br from-emerald-500 to-teal-600 w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center text-xl sm:text-2xl shadow-lg">
@@ -72,7 +79,7 @@ export default function Home() {
             </div>
           </div>
         </header>
-        <main className="w-full px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
+        <main className="flex-1 w-full px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8 overflow-y-auto">
           <DashboardSkeleton />
         </main>
       </div>
@@ -84,9 +91,9 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="h-screen flex flex-col overflow-hidden">
       {/* Header */}
-      <header className="bg-white/95 backdrop-blur-md border-b-2 border-white/20 sticky top-0 z-50 shadow-xl">
+      <header className="bg-white/95 backdrop-blur-md border-b-2 border-white/20 sticky top-0 z-50 shadow-xl flex-shrink-0">
         <div className="w-full px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
           <div className="flex items-center justify-between gap-2 sm:gap-4">
             {/* Logo and Title */}
@@ -134,8 +141,8 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Navigation Tabs - File Tab Style */}
-          <div className="flex gap-1.5 sm:gap-3 mt-4 sm:mt-6 overflow-x-auto pb-1 scrollbar-hide -mx-4 px-4 sm:mx-0 sm:px-0">
+          {/* Navigation Tabs - File Tab Style (Hidden on mobile, shown on desktop) */}
+          <div className="hidden md:flex gap-1.5 sm:gap-3 mt-4 sm:mt-6 overflow-x-auto pb-1 scrollbar-hide">
             {(Object.keys(TAB_STYLES) as TabType[]).map((tab) => {
               const isActive = activeTab === tab;
               const styles = TAB_STYLES[tab];
@@ -171,8 +178,8 @@ export default function Home() {
         <ExpenseForm onClose={() => setShowExpenseForm(false)} />
       </Modal>
 
-      {/* Main Content */}
-      <main className="w-full px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8 pb-24 sm:pb-8">
+      {/* Main Content - Flex-1 fills available space, scrollable */}
+      <main className="flex-1 w-full px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8 pb-24 md:pb-8 overflow-y-auto">
         <div className="max-w-7xl mx-auto space-y-4 sm:space-y-6">
           {/* Content Views */}
           {activeTab === 'dashboard' && <Dashboard onAddExpense={handleAddExpense} />}
@@ -189,11 +196,12 @@ export default function Home() {
           )}
           {activeTab === 'budgets' && <BudgetManager />}
           {activeTab === 'recurring' && <RecurringExpensesManager />}
+          {activeTab === 'settings' && <SecuritySettings />}
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="bg-white/90 backdrop-blur-md border-t-2 border-white/30 mt-12 sm:mt-16 shadow-2xl">
+      {/* Footer - Hidden on mobile, shown on desktop */}
+      <footer className="hidden md:block bg-white/90 backdrop-blur-md border-t-2 border-white/30 mt-12 sm:mt-16 shadow-2xl">
         <div className="w-full px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
           <p className="text-center text-lg sm:text-xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
             Turning expenses into insights ✨
@@ -203,6 +211,9 @@ export default function Home() {
           </p>
         </div>
       </footer>
+
+      {/* Mobile Bottom Navigation */}
+      <BottomNav activeTab={activeTab} onTabChange={setActiveTab} />
 
       {/* Floating Action Button */}
       <FloatingActionButton onClick={handleAddExpense} />

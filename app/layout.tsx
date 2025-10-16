@@ -4,7 +4,12 @@ import "./globals.css";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ExpenseProvider } from "@/contexts/ExpenseContext";
 
-const inter = Inter({ subsets: ["latin"] });
+// Inter font with tabular figures for better number alignment
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Monetly - Smart Expense Tracker",
