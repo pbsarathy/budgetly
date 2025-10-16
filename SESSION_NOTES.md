@@ -980,17 +980,18 @@ User asked about using **Haiku** to save tokens. Recommendation: **STAY WITH SON
 
 ---
 
-**Last Updated:** October 16, 2025 - Late Night Session (Fix Session)
+**Last Updated:** October 16, 2025 - Late Night Session (Fix Session + UX Improvements)
 **Current Status:** FULLY FUNCTIONAL! 🎉
 **Authentication:** ✅ Google OAuth via Supabase (FIXED!)
 **Backend:** ✅ PostgreSQL with RLS policies + API Access (FIXED!)
 **Migration:** ✅ localStorage → Supabase working
 **Logo:** Savings Pig (#5) - Professional SVG
 **Latest Commits:**
-  - 03ebc4a - Fix CSP blocking Supabase API calls
+  - 1437d15 - Fix budget warning cancel + add form cancel buttons
+  - 9a7e649 - Document OAuth and CSP bug fixes
+  - 03ebc4a - Fix CSP blocking Supabase API calls (CRITICAL!)
   - 35d0563 - Add detailed logging for debugging
   - 6fef922 - Fix OAuth with proper SSR cookie handling
-  - f1bfc20 - Initial OAuth redirect bug fix attempt
 **Deployment:** ✅ Live on Vercel with FULL working authentication & database
 **Next Focus:** Smart features & UX polish 🚀
 
@@ -1090,5 +1091,52 @@ After Vercel deployment completes:
 4. **Should land on dashboard with "Welcome" or expense data**
 5. Add an expense - **should succeed**
 6. Refresh page - **should stay logged in**
+
+---
+
+#### 🐛 ADDITIONAL BUG FIX (Same Session)
+
+**4. Budget Form Cancel Behavior (Fixed!)** - Commit: 1437d15
+- **Problem:**
+  - When adding category budget that exceeds overall budget
+  - Warning dialog appears: "Do you want to continue?"
+  - Clicking Cancel prevented save BUT form stayed visible
+  - No way to close form except scrolling to header button
+
+- **Solution:**
+  - When warning is cancelled, form now resets and closes automatically
+  - Added Cancel buttons to both budget forms (Overall + Category)
+  - Cancel buttons clear input and hide form
+
+- **Changes:**
+  - `components/BudgetManager.tsx:87-90` - Reset form on warning cancel
+  - `components/BudgetManager.tsx:163-180` - Cancel button for overall budget form
+  - `components/BudgetManager.tsx:266-283` - Cancel button for category budget form
+
+- **UX Improvements:**
+  - Clear action when user cancels warning
+  - Easy way to cancel form without scrolling
+  - Consistent button placement (Save + Cancel side by side)
+
+---
+
+### 📝 Testing Framework Gap Identified
+
+**Current State:** NO tests in codebase
+- No Jest, Vitest, React Testing Library, or Playwright
+- No test scripts in package.json
+- All test files are in node_modules (dependencies only)
+
+**Why CSP Bug Wasn't Caught:**
+- No E2E authentication flow tests
+- No API connectivity checks
+- No CSP compliance verification
+- Manual testing only
+
+**Recommendation:**
+- Add Vitest + React Testing Library for component tests
+- Add Playwright for E2E tests (login flow, CRUD operations)
+- Add API connection health checks
+- **Priority test:** E2E auth flow (would have caught both OAuth + CSP issues!)
 
 ---
