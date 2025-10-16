@@ -84,6 +84,9 @@ export default function BudgetManager() {
         if (!window.confirm(
           `Warning: Total category budgets (${formatCurrency(totalCategoryBudgets)}) exceed your overall budget (${formatCurrency(overallBudget)}). Do you want to continue?`
         )) {
+          // User clicked Cancel - reset form and close
+          setBudgetAmount('');
+          setShowForm(false);
           return;
         }
       }
@@ -157,12 +160,24 @@ export default function BudgetManager() {
               />
             </div>
           </div>
-          <button
-            type="submit"
-            className="mt-4 px-5 py-2.5 bg-gradient-to-r from-indigo-600 to-indigo-700 text-white hover:from-indigo-700 hover:to-indigo-800 transition-all duration-200 font-medium shadow-sm hover:shadow text-sm"
-          >
-            Save Overall Budget
-          </button>
+          <div className="mt-4 flex gap-3">
+            <button
+              type="submit"
+              className="px-5 py-2.5 bg-gradient-to-r from-indigo-600 to-indigo-700 text-white hover:from-indigo-700 hover:to-indigo-800 transition-all duration-200 font-medium shadow-sm hover:shadow text-sm"
+            >
+              Save Overall Budget
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setOverallBudgetAmount('');
+                setShowOverallForm(false);
+              }}
+              className="px-5 py-2.5 bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200 font-medium shadow-sm hover:shadow text-sm"
+            >
+              Cancel
+            </button>
+          </div>
         </form>
       )}
 
@@ -260,12 +275,24 @@ export default function BudgetManager() {
               />
             </div>
           </div>
-          <button
-            type="submit"
-            className="mt-4 px-5 py-2.5 bg-gradient-to-r from-slate-700 to-slate-800 text-white hover:from-slate-800 hover:to-slate-900 transition-all duration-200 font-medium shadow-sm hover:shadow text-sm"
-          >
-            Save Category Budget
-          </button>
+          <div className="mt-4 flex gap-3">
+            <button
+              type="submit"
+              className="px-5 py-2.5 bg-gradient-to-r from-slate-700 to-slate-800 text-white hover:from-slate-800 hover:to-slate-900 transition-all duration-200 font-medium shadow-sm hover:shadow text-sm"
+            >
+              Save Category Budget
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setBudgetAmount('');
+                setShowForm(false);
+              }}
+              className="px-5 py-2.5 bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200 font-medium shadow-sm hover:shadow text-sm"
+            >
+              Cancel
+            </button>
+          </div>
         </form>
       )}
 
