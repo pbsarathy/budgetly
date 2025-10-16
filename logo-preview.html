@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monetly Logo Preview</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            text-align: center;
+            color: #1e293b;
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+        }
+        .logo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .logo-card {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            border: 2px solid #e2e8f0;
+        }
+        .logo-card h3 {
+            margin-top: 20px;
+            color: #475569;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .logo-wrapper {
+            display: inline-block;
+            position: relative;
+            margin: 20px 0;
+        }
+        .logo-glow {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom right, #4f46e5, #9333ea, #ec4899);
+            opacity: 0.75;
+            filter: blur(8px);
+            transition: opacity 0.3s;
+        }
+        .logo-wrapper:hover .logo-glow {
+            opacity: 1;
+        }
+        .logo-container {
+            position: relative;
+            background: linear-gradient(to bottom right, #4f46e5, #9333ea, #ec4899);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+            border-radius: 12px;
+        }
+        .logo-wrapper:hover .logo-container {
+            transform: scale(1.05);
+        }
+        .mobile-logo .logo-container {
+            width: 48px;
+            height: 48px;
+        }
+        .desktop-logo .logo-container {
+            width: 64px;
+            height: 64px;
+        }
+        .large-logo .logo-container {
+            width: 128px;
+            height: 128px;
+        }
+        .mobile-logo svg {
+            width: 28px;
+            height: 28px;
+        }
+        .desktop-logo svg {
+            width: 40px;
+            height: 40px;
+        }
+        .large-logo svg {
+            width: 80px;
+            height: 80px;
+        }
+        .header-preview {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 40px;
+        }
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .header-content h1 {
+            margin: 0;
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(to right, #4f46e5, #9333ea, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .header-content p {
+            margin: 4px 0 0 0;
+            font-size: 0.875rem;
+            color: #64748b;
+            font-weight: 500;
+        }
+        .bg-preview {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+        }
+        .bg-card {
+            padding: 30px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .bg-white { background: white; }
+        .bg-light { background: #f1f5f9; }
+        .bg-dark { background: #1e293b; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Monetly Logo Preview</h1>
+
+        <div class="logo-grid">
+            <div class="logo-card mobile-logo">
+                <h3>Mobile Size (48×48)</h3>
+                <div class="logo-wrapper">
+                    <div class="logo-glow"></div>
+                    <div class="logo-container">
+                        <svg class="text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="color: white;">
+                            <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                            <circle cx="12" cy="12" r="3" fill="currentColor" opacity="0.3"/>
+                            <path d="M12 9v6M9 12h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="logo-card desktop-logo">
+                <h3>Desktop Size (64×64)</h3>
+                <div class="logo-wrapper">
+                    <div class="logo-glow"></div>
+                    <div class="logo-container">
+                        <svg class="text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="color: white;">
+                            <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                            <circle cx="12" cy="12" r="3" fill="currentColor" opacity="0.3"/>
+                            <path d="M12 9v6M9 12h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="logo-card large-logo">
+                <h3>Large Size (128×128)</h3>
+                <div class="logo-wrapper">
+                    <div class="logo-glow"></div>
+                    <div class="logo-container">
+                        <svg class="text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="color: white;">
+                            <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                            <circle cx="12" cy="12" r="3" fill="currentColor" opacity="0.3"/>
+                            <path d="M12 9v6M9 12h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-preview">
+            <h3 style="margin-top: 0; color: #64748b;">How it looks in the header:</h3>
+            <div class="header-content">
+                <div class="logo-wrapper desktop-logo">
+                    <div class="logo-glow"></div>
+                    <div class="logo-container">
+                        <svg class="text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="color: white;">
+                            <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                            <circle cx="12" cy="12" r="3" fill="currentColor" opacity="0.3"/>
+                            <path d="M12 9v6M9 12h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </div>
+                <div>
+                    <h1>Monetly</h1>
+                    <p>Turning expenses into insights ✨</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-preview">
+            <div class="bg-card bg-white">
+                <div class="logo-wrapper desktop-logo">
+                    <div class="logo-glow"></div>
+                    <div class="logo-container">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="color: white;">
+                            <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                            <circle cx="12" cy="12" r="3" fill="currentColor" opacity="0.3"/>
+                            <path d="M12 9v6M9 12h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-card bg-light">
+                <div class="logo-wrapper desktop-logo">
+                    <div class="logo-glow"></div>
+                    <div class="logo-container">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="color: white;">
+                            <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                            <circle cx="12" cy="12" r="3" fill="currentColor" opacity="0.3"/>
+                            <path d="M12 9v6M9 12h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-card bg-dark">
+                <div class="logo-wrapper desktop-logo">
+                    <div class="logo-glow"></div>
+                    <div class="logo-container">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="color: white;">
+                            <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                            <circle cx="12" cy="12" r="3" fill="currentColor" opacity="0.3"/>
+                            <path d="M12 9v6M9 12h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 40px; padding: 20px; background: #f1f5f9; border-radius: 12px;">
+            <h3 style="margin-top: 0; color: #1e293b;">Design Features:</h3>
+            <ul style="color: #475569; line-height: 1.8;">
+                <li><strong>Three horizontal lines</strong> - Representing stacked bills/money layers</li>
+                <li><strong>Central plus symbol</strong> - Core action of adding expenses</li>
+                <li><strong>Semi-transparent circle</strong> - Adds depth and focus to center</li>
+                <li><strong>Rounded corners</strong> - Modern, friendly aesthetic</li>
+                <li><strong>Gradient background</strong> - Brand colors (indigo → purple → pink)</li>
+                <li><strong>Glassmorphic glow</strong> - Subtle blur effect on hover</li>
+                <li><strong>Scalable SVG</strong> - Crisp at all sizes, no pixelation</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

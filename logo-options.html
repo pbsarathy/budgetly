@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monetly Logo Options - Choose Your Favorite!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            text-align: center;
+            color: #1e293b;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+        .subtitle {
+            text-align: center;
+            color: #64748b;
+            margin-bottom: 40px;
+            font-size: 1.125rem;
+        }
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .option-card {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            border: 3px solid #e2e8f0;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .option-card:hover {
+            border-color: #9333ea;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(147, 51, 234, 0.2);
+        }
+        .option-card h2 {
+            color: #1e293b;
+            margin: 20px 0 10px;
+            font-size: 1.5rem;
+        }
+        .option-number {
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(to right, #4f46e5, #9333ea);
+            color: white;
+            border-radius: 50%;
+            line-height: 32px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .option-card p {
+            color: #64748b;
+            font-size: 0.875rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .pros {
+            background: #f0fdf4;
+            border: 1px solid #86efac;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            text-align: left;
+        }
+        .pros h4 {
+            color: #166534;
+            font-size: 0.75rem;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .pros ul {
+            list-style: none;
+            color: #15803d;
+            font-size: 0.813rem;
+        }
+        .pros li::before {
+            content: "✓ ";
+            font-weight: bold;
+        }
+        .logo-wrapper {
+            display: inline-block;
+            position: relative;
+            margin: 20px 0;
+        }
+        .logo-glow {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom right, #4f46e5, #9333ea, #ec4899);
+            opacity: 0.75;
+            filter: blur(8px);
+            transition: opacity 0.3s;
+        }
+        .option-card:hover .logo-glow {
+            opacity: 1;
+        }
+        .logo-container {
+            position: relative;
+            background: linear-gradient(to bottom right, #4f46e5, #9333ea, #ec4899);
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+            border-radius: 16px;
+        }
+        .option-card:hover .logo-container {
+            transform: scale(1.1) rotate(5deg);
+        }
+        .logo-container svg {
+            width: 48px;
+            height: 48px;
+            color: white;
+        }
+        .header-preview {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .header-preview .logo-container {
+            width: 48px;
+            height: 48px;
+        }
+        .header-preview .logo-container svg {
+            width: 28px;
+            height: 28px;
+        }
+        .header-preview h3 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(to right, #4f46e5, #9333ea, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Choose Your Monetly Logo</h1>
+        <p class="subtitle">Pick the design that best represents your brand!</p>
+
+        <div class="options-grid">
+            <!-- Option 1: Money Stack (Current) -->
+            <div class="option-card">
+                <span class="option-number">1</span>
+                <h2>Money Stack</h2>
+                <p>Abstract representation of stacked bills with a plus symbol</p>
+                <div class="logo-wrapper">
+                    <div class="logo-glow"></div>
+                    <div class="logo-container">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                            <circle cx="12" cy="12" r="3" fill="currentColor" opacity="0.3"/>
+                            <path d="M12 9v6M9 12h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="header-preview">
+                    <div class="logo-wrapper">
+                        <div class="logo-glow"></div>
+                        <div class="logo-container">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                                <circle cx="12" cy="12" r="3" fill="currentColor" opacity="0.3"/>
+                                <path d="M12 9v6M9 12h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3>Monetly</h3>
+                </div>
+                <div class="pros">
+                    <h4>Best For</h4>
+                    <ul>
+                        <li>Modern, minimal aesthetic</li>
+                        <li>Clear "money" symbolism</li>
+                        <li>Works at small sizes</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Option 2: Wallet Icon -->
+            <div class="option-card">
+                <span class="option-number">2</span>
+                <h2>Smart Wallet</h2>
+                <p>Stylized wallet with card slots, representing personal finance</p>
+                <div class="logo-wrapper">
+                    <div class="logo-glow"></div>
+                    <div class="logo-container">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="3" y="6" width="18" height="14" rx="2" stroke="currentColor" stroke-width="2"/>
+                            <path d="M3 10h18" stroke="currentColor" stroke-width="2"/>
+                            <circle cx="17" cy="15" r="1.5" fill="currentColor"/>
+                            <path d="M7 14h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="header-preview">
+                    <div class="logo-wrapper">
+                        <div class="logo-glow"></div>
+                        <div class="logo-container">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="3" y="6" width="18" height="14" rx="2" stroke="currentColor" stroke-width="2"/>
+                                <path d="M3 10h18" stroke="currentColor" stroke-width="2"/>
+                                <circle cx="17" cy="15" r="1.5" fill="currentColor"/>
+                                <path d="M7 14h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3>Monetly</h3>
+                </div>
+                <div class="pros">
+                    <h4>Best For</h4>
+                    <ul>
+                        <li>Personal finance focus</li>
+                        <li>Familiar, relatable symbol</li>
+                        <li>Professional appearance</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Option 3: Coin Stack -->
+            <div class="option-card">
+                <span class="option-number">3</span>
+                <h2>Coin Stack</h2>
+                <p>Three stacked coins representing wealth accumulation</p>
+                <div class="logo-wrapper">
+                    <div class="logo-glow"></div>
+                    <div class="logo-container">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <ellipse cx="12" cy="8" rx="6" ry="2" fill="currentColor" opacity="0.3"/>
+                            <path d="M6 8v3c0 1.1 2.7 2 6 2s6-.9 6-2V8" stroke="currentColor" stroke-width="2"/>
+                            <ellipse cx="12" cy="11" rx="6" ry="2" stroke="currentColor" stroke-width="2"/>
+                            <path d="M6 11v3c0 1.1 2.7 2 6 2s6-.9 6-2v-3" stroke="currentColor" stroke-width="2"/>
+                            <ellipse cx="12" cy="14" rx="6" ry="2" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="header-preview">
+                    <div class="logo-wrapper">
+                        <div class="logo-glow"></div>
+                        <div class="logo-container">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <ellipse cx="12" cy="8" rx="6" ry="2" fill="currentColor" opacity="0.3"/>
+                                <path d="M6 8v3c0 1.1 2.7 2 6 2s6-.9 6-2V8" stroke="currentColor" stroke-width="2"/>
+                                <ellipse cx="12" cy="11" rx="6" ry="2" stroke="currentColor" stroke-width="2"/>
+                                <path d="M6 11v3c0 1.1 2.7 2 6 2s6-.9 6-2v-3" stroke="currentColor" stroke-width="2"/>
+                                <ellipse cx="12" cy="14" rx="6" ry="2" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3>Monetly</h3>
+                </div>
+                <div class="pros">
+                    <h4>Best For</h4>
+                    <ul>
+                        <li>Savings/accumulation focus</li>
+                        <li>Classic money symbol</li>
+                        <li>3D depth effect</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Option 4: Chart Trending Up -->
+            <div class="option-card">
+                <span class="option-number">4</span>
+                <h2>Growth Chart</h2>
+                <p>Upward trending chart with currency symbol</p>
+                <div class="logo-wrapper">
+                    <div class="logo-glow"></div>
+                    <div class="logo-container">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 17l4-4 4 4 6-8 4 4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="18" cy="6" r="4" fill="currentColor" opacity="0.3"/>
+                            <text x="18" y="8.5" font-size="6" fill="currentColor" text-anchor="middle" font-weight="bold">₹</text>
+                        </svg>
+                    </div>
+                </div>
+                <div class="header-preview">
+                    <div class="logo-wrapper">
+                        <div class="logo-glow"></div>
+                        <div class="logo-container">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3 17l4-4 4 4 6-8 4 4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <circle cx="18" cy="6" r="4" fill="currentColor" opacity="0.3"/>
+                                <text x="18" y="8.5" font-size="6" fill="currentColor" text-anchor="middle" font-weight="bold">₹</text>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3>Monetly</h3>
+                </div>
+                <div class="pros">
+                    <h4>Best For</h4>
+                    <ul>
+                        <li>Analytics/insights focus</li>
+                        <li>Growth mindset</li>
+                        <li>Data-driven vibe</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Option 5: Piggy Bank -->
+            <div class="option-card">
+                <span class="option-number">5</span>
+                <h2>Savings Pig</h2>
+                <p>Modern geometric piggy bank icon</p>
+                <div class="logo-wrapper">
+                    <div class="logo-glow"></div>
+                    <div class="logo-container">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M18 11c0-3.3-2.7-6-6-6s-6 2.7-6 6v5c0 1.7 1.3 3 3 3h6c1.7 0 3-1.3 3-3v-5z" fill="currentColor" opacity="0.3"/>
+                            <circle cx="12" cy="11" r="6" stroke="currentColor" stroke-width="2"/>
+                            <path d="M12 8v6M9 11h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            <circle cx="10" cy="10" r="1" fill="currentColor"/>
+                            <path d="M18 11h3M3 11h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="header-preview">
+                    <div class="logo-wrapper">
+                        <div class="logo-glow"></div>
+                        <div class="logo-container">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M18 11c0-3.3-2.7-6-6-6s-6 2.7-6 6v5c0 1.7 1.3 3 3 3h6c1.7 0 3-1.3 3-3v-5z" fill="currentColor" opacity="0.3"/>
+                                <circle cx="12" cy="11" r="6" stroke="currentColor" stroke-width="2"/>
+                                <path d="M12 8v6M9 11h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <circle cx="10" cy="10" r="1" fill="currentColor"/>
+                                <path d="M18 11h3M3 11h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3>Monetly</h3>
+                </div>
+                <div class="pros">
+                    <h4>Best For</h4>
+                    <ul>
+                        <li>Friendly, approachable</li>
+                        <li>Savings emphasis</li>
+                        <li>Playful yet professional</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Option 6: Credit Card -->
+            <div class="option-card">
+                <span class="option-number">6</span>
+                <h2>Smart Card</h2>
+                <p>Minimalist credit card with chip</p>
+                <div class="logo-wrapper">
+                    <div class="logo-glow"></div>
+                    <div class="logo-container">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="2" y="7" width="20" height="12" rx="2" stroke="currentColor" stroke-width="2"/>
+                            <path d="M2 11h20" stroke="currentColor" stroke-width="2.5"/>
+                            <rect x="5" y="14" width="4" height="3" rx="0.5" fill="currentColor" opacity="0.3"/>
+                            <path d="M12 15h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="header-preview">
+                    <div class="logo-wrapper">
+                        <div class="logo-glow"></div>
+                        <div class="logo-container">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="2" y="7" width="20" height="12" rx="2" stroke="currentColor" stroke-width="2"/>
+                                <path d="M2 11h20" stroke="currentColor" stroke-width="2.5"/>
+                                <rect x="5" y="14" width="4" height="3" rx="0.5" fill="currentColor" opacity="0.3"/>
+                                <path d="M12 15h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3>Monetly</h3>
+                </div>
+                <div class="pros">
+                    <h4>Best For</h4>
+                    <ul>
+                        <li>Expense tracking focus</li>
+                        <li>Modern payments</li>
+                        <li>Clean, tech-forward</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Option 7: Currency Symbol -->
+            <div class="option-card">
+                <span class="option-number">7</span>
+                <h2>Rupee Circle</h2>
+                <p>Bold rupee symbol in circular badge</p>
+                <div class="logo-wrapper">
+                    <div class="logo-glow"></div>
+                    <div class="logo-container">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2.5"/>
+                            <path d="M9 8h6M9 11h6M9 14l5-3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M10 11c0 1.5 1 2.5 2.5 2.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="header-preview">
+                    <div class="logo-wrapper">
+                        <div class="logo-glow"></div>
+                        <div class="logo-container">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2.5"/>
+                                <path d="M9 8h6M9 11h6M9 14l5-3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M10 11c0 1.5 1 2.5 2.5 2.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3>Monetly</h3>
+                </div>
+                <div class="pros">
+                    <h4>Best For</h4>
+                    <ul>
+                        <li>Direct, no ambiguity</li>
+                        <li>Indian market focus</li>
+                        <li>Bold statement</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Option 8: Receipt -->
+            <div class="option-card">
+                <span class="option-number">8</span>
+                <h2>Smart Receipt</h2>
+                <p>Stylized receipt with expense items</p>
+                <div class="logo-wrapper">
+                    <div class="logo-glow"></div>
+                    <div class="logo-container">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7 2v20l2-1.5 2 1.5 2-1.5 2 1.5V2l-2 1.5L11 2 9 3.5 7 2z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                            <path d="M9 7h6M9 10h4M9 13h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            <circle cx="12" cy="17" r="1.5" fill="currentColor"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="header-preview">
+                    <div class="logo-wrapper">
+                        <div class="logo-glow"></div>
+                        <div class="logo-container">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7 2v20l2-1.5 2 1.5 2-1.5 2 1.5V2l-2 1.5L11 2 9 3.5 7 2z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                                <path d="M9 7h6M9 10h4M9 13h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                <circle cx="12" cy="17" r="1.5" fill="currentColor"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3>Monetly</h3>
+                </div>
+                <div class="pros">
+                    <h4>Best For</h4>
+                    <ul>
+                        <li>Expense documentation</li>
+                        <li>Detail-oriented users</li>
+                        <li>Unique, memorable</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Option 9: Letter M Monogram -->
+            <div class="option-card">
+                <span class="option-number">9</span>
+                <h2>M Monogram</h2>
+                <p>Stylized "M" with currency element</p>
+                <div class="logo-wrapper">
+                    <div class="logo-glow"></div>
+                    <div class="logo-container">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 18V6l4 6 4-6 4 6 4-6v12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="12" cy="12" r="3" fill="currentColor" opacity="0.2"/>
+                            <path d="M12 10v4M10 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="header-preview">
+                    <div class="logo-wrapper">
+                        <div class="logo-glow"></div>
+                        <div class="logo-container">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 18V6l4 6 4-6 4 6 4-6v12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <circle cx="12" cy="12" r="3" fill="currentColor" opacity="0.2"/>
+                                <path d="M12 10v4M10 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3>Monetly</h3>
+                </div>
+                <div class="pros">
+                    <h4>Best For</h4>
+                    <ul>
+                        <li>Brand recognition</li>
+                        <li>Lettermark style</li>
+                        <li>Elegant, sophisticated</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div style="background: linear-gradient(135deg, #f0f9ff 0%, #e0e7ff 100%); border-radius: 16px; padding: 30px; margin-top: 40px;">
+            <h2 style="color: #1e293b; margin-bottom: 15px;">💡 Quick Decision Guide</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; color: #475569; font-size: 0.875rem; line-height: 1.6;">
+                <div>
+                    <strong style="color: #1e293b;">For Modern Tech Vibe:</strong>
+                    <br>→ Smart Card (#6) or Growth Chart (#4)
+                </div>
+                <div>
+                    <strong style="color: #1e293b;">For Approachable Feel:</strong>
+                    <br>→ Savings Pig (#5) or Smart Wallet (#2)
+                </div>
+                <div>
+                    <strong style="color: #1e293b;">For Bold Statement:</strong>
+                    <br>→ Rupee Circle (#7) or M Monogram (#9)
+                </div>
+                <div>
+                    <strong style="color: #1e293b;">For Classic Finance:</strong>
+                    <br>→ Coin Stack (#3) or Money Stack (#1)
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
