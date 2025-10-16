@@ -12,7 +12,7 @@ const CATEGORIES: ExpenseCategory[] = [
   'Shopping',
   'Bills',
   'Education',
-  'Savings',
+  'Investments',
   'Other',
 ];
 

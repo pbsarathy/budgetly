@@ -12,7 +12,7 @@ const CATEGORY_COLORS: Record<ExpenseCategory, string> = {
   Shopping: '#ec4899',
   Bills: '#ef4444',
   Education: '#6366f1',
-  Savings: '#10b981',
+  Investments: '#10b981',
   Other: '#64748b',
 };
 
@@ -28,7 +28,7 @@ export default function Charts() {
       Shopping: 0,
       Bills: 0,
       Education: 0,
-      Savings: 0,
+      Investments: 0,
       Other: 0,
     };
 
