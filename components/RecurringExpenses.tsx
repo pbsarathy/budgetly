@@ -13,6 +13,9 @@ const CATEGORIES: ExpenseCategory[] = [
   'Bills',
   'Education',
   'Investments',
+  'Daily Spends',
+  'EMI',
+  'Maintenance',
   'Other',
 ];
 

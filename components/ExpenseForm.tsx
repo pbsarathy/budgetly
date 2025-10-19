@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Expense, ExpenseCategory, BillSubcategory, InvestmentSubcategory } from '@/types/expense';
+import { Expense, ExpenseCategory, BillSubcategory, InvestmentSubcategory, DailySpendSubcategory, EMISubcategory } from '@/types/expense';
 import { generateId } from '@/lib/utils';
 import { useExpenses } from '@/contexts/ExpenseContext';
 
@@ -13,11 +13,13 @@ const CATEGORIES: ExpenseCategory[] = [
   'Bills',
   'Education',
   'Investments',
+  'Daily Spends',
+  'EMI',
+  'Maintenance',
   'Other',
 ];
 
 const BILL_SUBCATEGORIES: BillSubcategory[] = [
-  'EMI',
   'Credit Card',
   'Internet',
   'Mobile',
@@ -37,6 +39,23 @@ const INVESTMENT_SUBCATEGORIES: InvestmentSubcategory[] = [
   'Other',
 ];
 
+const DAILY_SPEND_SUBCATEGORIES: DailySpendSubcategory[] = [
+  'Groceries',
+  'Vegetables',
+  'Fruits',
+  'Dairy',
+  'Snacks',
+  'Others',
+];
+
+const EMI_SUBCATEGORIES: EMISubcategory[] = [
+  'Personal Loan',
+  'Home Loan',
+  'Vehicle Loan',
+  'Education Loan',
+  'Others',
+];
+
 interface ExpenseFormProps {
   editingExpense?: Expense | null;
   onCancel?: () => void;
@@ -49,7 +68,7 @@ export default function ExpenseForm({ editingExpense, onCancel, onClose }: Expen
   const [formData, setFormData] = useState({
     amount: '',
     category: 'Food' as ExpenseCategory,
-    subcategory: '' as BillSubcategory | InvestmentSubcategory | '',
+    subcategory: '' as BillSubcategory | InvestmentSubcategory | DailySpendSubcategory | EMISubcategory | '',
     customSubcategory: '',
     customCategory: '',
     description: '',
@@ -75,9 +94,9 @@ export default function ExpenseForm({ editingExpense, onCancel, onClose }: Expen
     }
   }, [editingExpense]);
 
-  // Reset subcategory when category changes away from Bills and Investments
+  // Reset subcategory when category changes away from Bills, Investments, Daily Spends, and EMI
   useEffect(() => {
-    if (formData.category !== 'Bills' && formData.category !== 'Investments') {
+    if (formData.category !== 'Bills' && formData.category !== 'Investments' && formData.category !== 'Daily Spends' && formData.category !== 'EMI') {
       setFormData(prev => ({ ...prev, subcategory: '', customSubcategory: '' }));
     }
   }, [formData.category]);
@@ -105,11 +124,19 @@ export default function ExpenseForm({ editingExpense, onCancel, onClose }: Expen
       newErrors.subcategory = 'Please select an investment type';
     }
 
+    if (formData.category === 'Daily Spends' && !formData.subcategory) {
+      newErrors.subcategory = 'Please select a daily spend type';
+    }
+
+    if (formData.category === 'EMI' && !formData.subcategory) {
+      newErrors.subcategory = 'Please select an EMI type';
+    }
+
     if (formData.category === 'Other' && !formData.customCategory.trim()) {
       newErrors.customCategory = 'Please enter a category name';
     }
 
-    if (formData.subcategory === 'Other' && !formData.customSubcategory.trim()) {
+    if ((formData.subcategory === 'Other' || formData.subcategory === 'Others') && !formData.customSubcategory.trim()) {
       newErrors.customSubcategory = 'Please enter a subcategory name';
     }
 
@@ -144,13 +171,23 @@ export default function ExpenseForm({ editingExpense, onCancel, onClose }: Expen
         expenseData.subcategory = formData.subcategory as InvestmentSubcategory;
       }
 
+      // Add subcategory for Daily Spends
+      if (formData.category === 'Daily Spends' && formData.subcategory) {
+        expenseData.subcategory = formData.subcategory as DailySpendSubcategory;
+      }
+
+      // Add subcategory for EMI
+      if (formData.category === 'EMI' && formData.subcategory) {
+        expenseData.subcategory = formData.subcategory as EMISubcategory;
+      }
+
       // Add custom category if Other is selected
       if (formData.category === 'Other' && formData.customCategory) {
         expenseData.customCategory = formData.customCategory.trim();
       }
 
-      // Add custom subcategory if Other is selected
-      if (formData.subcategory === 'Other' && formData.customSubcategory) {
+      // Add custom subcategory if Other or Others is selected
+      if ((formData.subcategory === 'Other' || formData.subcategory === 'Others') && formData.customSubcategory) {
         expenseData.customSubcategory = formData.customSubcategory.trim();
       }
 
@@ -166,11 +203,25 @@ export default function ExpenseForm({ editingExpense, onCancel, onClose }: Expen
 
         // If recurring is checked, also create a recurring expense
         if (isRecurring) {
+          let subcategory: BillSubcategory | InvestmentSubcategory | DailySpendSubcategory | EMISubcategory | undefined = undefined;
+
+          if (formData.subcategory) {
+            if (formData.category === 'Bills') {
+              subcategory = formData.subcategory as BillSubcategory;
+            } else if (formData.category === 'Investments') {
+              subcategory = formData.subcategory as InvestmentSubcategory;
+            } else if (formData.category === 'Daily Spends') {
+              subcategory = formData.subcategory as DailySpendSubcategory;
+            } else if (formData.category === 'EMI') {
+              subcategory = formData.subcategory as EMISubcategory;
+            }
+          }
+
           const recurringExpense = {
             id: generateId(),
             amount: parseFloat(formData.amount),
             category: formData.category,
-            subcategory: formData.subcategory ? (formData.category === 'Bills' ? formData.subcategory as BillSubcategory : formData.subcategory as InvestmentSubcategory) : undefined,
+            subcategory,
             customSubcategory: formData.customSubcategory || undefined,
             customCategory: formData.customCategory || undefined,
             description: formData.description.trim(),
@@ -316,11 +367,63 @@ export default function ExpenseForm({ editingExpense, onCancel, onClose }: Expen
           </div>
         )}
 
-        {/* Custom Subcategory - Only shown when Other subcategory is selected */}
-        {formData.subcategory === 'Other' && (
+        {/* Daily Spends Subcategory - Only shown when Daily Spends is selected */}
+        {formData.category === 'Daily Spends' && (
+          <div>
+            <label htmlFor="dailyspend-subcategory" className="block text-sm font-medium text-slate-700 mb-1.5">
+              Daily Spend Type <span className="text-red-500">*</span>
+            </label>
+            <select
+              id="dailyspend-subcategory"
+              value={formData.subcategory}
+              onChange={(e) => setFormData({ ...formData, subcategory: e.target.value as DailySpendSubcategory, customSubcategory: '' })}
+              className={`w-full px-3 py-2.5 border focus:ring-2 focus:ring-slate-900 focus:border-transparent transition-all ${
+                errors.subcategory ? 'border-red-500' : 'border-slate-300'
+              }`}
+              required
+            >
+              <option value="">Select daily spend type</option>
+              {DAILY_SPEND_SUBCATEGORIES.map((sub) => (
+                <option key={sub} value={sub}>
+                  {sub}
+                </option>
+              ))}
+            </select>
+            {errors.subcategory && <p className="mt-1 text-xs text-red-500">{errors.subcategory}</p>}
+          </div>
+        )}
+
+        {/* EMI Subcategory - Only shown when EMI is selected */}
+        {formData.category === 'EMI' && (
+          <div>
+            <label htmlFor="emi-subcategory" className="block text-sm font-medium text-slate-700 mb-1.5">
+              EMI Type <span className="text-red-500">*</span>
+            </label>
+            <select
+              id="emi-subcategory"
+              value={formData.subcategory}
+              onChange={(e) => setFormData({ ...formData, subcategory: e.target.value as EMISubcategory, customSubcategory: '' })}
+              className={`w-full px-3 py-2.5 border focus:ring-2 focus:ring-slate-900 focus:border-transparent transition-all ${
+                errors.subcategory ? 'border-red-500' : 'border-slate-300'
+              }`}
+              required
+            >
+              <option value="">Select EMI type</option>
+              {EMI_SUBCATEGORIES.map((sub) => (
+                <option key={sub} value={sub}>
+                  {sub}
+                </option>
+              ))}
+            </select>
+            {errors.subcategory && <p className="mt-1 text-xs text-red-500">{errors.subcategory}</p>}
+          </div>
+        )}
+
+        {/* Custom Subcategory - Only shown when Other or Others subcategory is selected */}
+        {(formData.subcategory === 'Other' || formData.subcategory === 'Others') && (
           <div>
             <label htmlFor="custom-subcategory" className="block text-sm font-medium text-slate-700 mb-1.5">
-              Custom {formData.category === 'Bills' ? 'Bill' : 'Investment'} Type <span className="text-red-500">*</span>
+              Custom {formData.category === 'Bills' ? 'Bill' : formData.category === 'Investments' ? 'Investment' : formData.category === 'Daily Spends' ? 'Daily Spend' : 'EMI'} Type <span className="text-red-500">*</span>
             </label>
             <input
               type="text"

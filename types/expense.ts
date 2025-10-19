@@ -6,10 +6,12 @@ export type ExpenseCategory =
   | 'Bills'
   | 'Education'
   | 'Investments'
+  | 'Daily Spends'
+  | 'EMI'
+  | 'Maintenance'
   | 'Other';
 
 export type BillSubcategory =
-  | 'EMI'
   | 'Credit Card'
   | 'Internet'
   | 'Mobile'
@@ -27,12 +29,27 @@ export type InvestmentSubcategory =
   | 'Jar'
   | 'Other';
 
+export type DailySpendSubcategory =
+  | 'Groceries'
+  | 'Vegetables'
+  | 'Fruits'
+  | 'Dairy'
+  | 'Snacks'
+  | 'Others';
+
+export type EMISubcategory =
+  | 'Personal Loan'
+  | 'Home Loan'
+  | 'Vehicle Loan'
+  | 'Education Loan'
+  | 'Others';
+
 export interface Expense {
   id: string;
   amount: number;
   category: ExpenseCategory;
-  subcategory?: BillSubcategory | InvestmentSubcategory; // Optional subcategory for Bills and Investments
-  customSubcategory?: string; // For "Other" subcategory
+  subcategory?: BillSubcategory | InvestmentSubcategory | DailySpendSubcategory | EMISubcategory; // Optional subcategory
+  customSubcategory?: string; // For "Others" subcategory
   customCategory?: string; // For "Other" category
   description: string;
   date: string; // ISO date string
@@ -73,8 +90,8 @@ export interface RecurringExpense {
   id: string;
   amount: number;
   category: ExpenseCategory;
-  subcategory?: BillSubcategory | InvestmentSubcategory; // Optional subcategory for Bills and Investments
-  customSubcategory?: string; // For "Other" subcategory
+  subcategory?: BillSubcategory | InvestmentSubcategory | DailySpendSubcategory | EMISubcategory; // Optional subcategory
+  customSubcategory?: string; // For "Others" subcategory
   customCategory?: string; // For "Other" category
   description: string;
   frequency: RecurringFrequency;

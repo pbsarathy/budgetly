@@ -13,6 +13,9 @@ const CATEGORY_COLORS: Record<ExpenseCategory, string> = {
   Bills: '#ef4444',
   Education: '#6366f1',
   Investments: '#10b981',
+  'Daily Spends': '#eab308',
+  EMI: '#f43f5e',
+  Maintenance: '#06b6d4',
   Other: '#64748b',
 };
 
@@ -29,6 +32,9 @@ export default function Charts() {
       Bills: 0,
       Education: 0,
       Investments: 0,
+      'Daily Spends': 0,
+      EMI: 0,
+      Maintenance: 0,
       Other: 0,
     };
 
