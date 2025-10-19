@@ -1,0 +1,13 @@
+# Test files
+tests/
+vitest.config.ts
+playwright.config.ts
+TESTING.md
+TESTING_SETUP_SUMMARY.md
+
+# Development files
+.claude/
+SESSION_NOTES.md
+
+# Environment files
+.env.test
